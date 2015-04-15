@@ -533,6 +533,20 @@ function printFinalPage($messages) {
 		
 		<?php 
 		
+		// Start - Ergänzung von ErdemCan: Abfrage auf PHP-Version vor der Installationsinizialiserung
+		if (version_compare(PHP_VERSION, '5.3.0') < 0 ) {
+			echo 'Es wird mindestens PHP 5.3.0 benötigt, es ist installiert die Version: ' . PHP_VERSION;
+			?>
+			<p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a></p>
+			<?php 
+			exit;
+		}
+		if (version_compare(PHP_VERSION, '5.7.0') >= 0 ) {
+			echo 'Ihre PHP Version' . PHP_VERSION . 'ist zu hoch, daher funktioniert die Installation wohl möglich nicht.';
+		}
+		
+		// End - hinzugefügt by ErdemCan
+		
 		$errors = array();
 		
 		$messagesIncluded = FALSE;
