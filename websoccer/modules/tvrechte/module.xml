@@ -30,13 +30,7 @@
                         type="text"
                         sort="true"
                         filter="true" />
-                    
-                    <column
-                        id="entity_tv_min_platz"
-                        field="SponsorTab.min_platz"
-                        type="number"
-                        sort="true" />
-                    
+
                     <column
                         id="entity_tv_max_teams"
                         field="SponsorTab.max_teams"
