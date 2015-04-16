@@ -1,4 +1,4 @@
-<?php 
+﻿<?php 
 /******************************************************
 
   This file is part of OpenWebSoccer-Sim.
@@ -542,7 +542,7 @@ function printFinalPage($messages) {
 			exit;
 		}
 		if (version_compare(PHP_VERSION, '5.7.0') >= 0 ) {
-			echo 'Ihre PHP Version' . PHP_VERSION . 'ist zu hoch, daher funktioniert die Installation wohl möglich nicht.';
+			echo 'Ihre PHP Version' . PHP_VERSION . ' ist zu hoch, daher funktioniert die Installation wohl möglich nicht.';
 		}
 		
 		// End - hinzugefügt by ErdemCan
