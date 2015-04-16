@@ -542,7 +542,7 @@ function printFinalPage($messages) {
 		}
 
 		if (version_compare(PHP_VERSION, '5.7.0', '>=')) {
-			echo 'Ihre PHP Version' . PHP_VERSION . 'ist zu hoch, daher funktioniert die Installation wohl möglich nicht nicht.';
+			echo 'Ihre PHP Version' . PHP_VERSION . ' ist zu hoch, daher funktioniert die Installation wohl möglich nicht nicht.';
 		}
 
 		
