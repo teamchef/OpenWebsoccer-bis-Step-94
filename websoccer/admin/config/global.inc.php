@@ -30,33 +30,149 @@ if (DEBUG) {
 
 // loads required classes on demand
 function classes_autoloader($class) {
-	
-	$subforder = '';
-	
-	if (substr($class, -9) === 'Converter') {
-		$subforder = 'converters/';
-	} else if (substr($class, -4) === 'Skin') {
-		$subforder = 'skins/';
-	} else if (substr($class, -5) === 'Model') {
-		$subforder = 'models/';
-	} else if (substr($class, -9) === 'Validator') {
-		$subforder = 'validators/';
-	} else if (substr($class, -10) === 'Controller') {
-		$subforder = 'actions/';
-	} else if (substr($class, -7) === 'Service') {
-		$subforder = 'services/';
-	} else if (substr($class, -3) === 'Job') {
-		$subforder = 'jobs/';
-	} else if (substr($class, -11) === 'LoginMethod') {
-		$subforder = 'loginmethods/';
-	} else if (substr($class, -5) === 'Event') {
-		$subforder = 'events/';
-	} else if (substr($class, -6) === 'Plugin') {
-		$subforder = 'plugins/';
-	}
-	
-	@include(BASE_FOLDER . '/classes/' . $subforder . $class . '.class.php');
+
+
+// alter nun obsoleter Teil
+//	
+//	$subforder = '';
+//	
+//	if (substr($class, -9) === 'Converter') {
+//		$subforder = 'converters/';
+//	} else if (substr($class, -4) === 'Skin') {
+//		$subforder = 'skins/';
+//	} else if (substr($class, -5) === 'Model') {
+//		$subforder = 'models/';
+//	} else if (substr($class, -9) === 'Validator') {
+//		$subforder = 'validators/';
+//	} else if (substr($class, -10) === 'Controller') {
+//		$subforder = 'actions/';
+//	} else if (substr($class, -7) === 'Service') {
+//		$subforder = 'services/';
+//	} else if (substr($class, -3) === 'Job') {
+//		$subforder = 'jobs/';
+//	} else if (substr($class, -11) === 'LoginMethod') {
+//		$subforder = 'loginmethods/';
+//	} else if (substr($class, -5) === 'Event') {
+//		$subforder = 'events/';
+//	} else if (substr($class, -6) === 'Plugin') {
+//		$subforder = 'plugins/';
+//	}
+//	
+//	@include(BASE_FOLDER . '/classes/' . $subforder . $class . '.class.php');
+// }
+
+
+// Start - alternative Class-Loader-Structur
+// Die Klassen werden nicht nur in den ursprünglich gesetzten Pfaden gesucht, sondern zusätzlich in den Modulordnern, um bei Bedarf geladen zu werden.
+// Dies ist der 1. Teil, um alle nötigen Dateien eines Moduls im Modulordner packen zu können, was nicht nur die Übersicht erhöht, sondern auch einfacher entwickelt und gepflegt werden kann.
+
+
+// Das Array gibt die zu druchsuchenden Pfade vor, in dem die benötigten Klassen stehen und bei Bedarf geladen werden.
+// Das System des Ordners classes mit seinen Subordnern, wurde durch die zugehörige Verteilung der Klassen zu den Mmodulen abgelöst.
+// Module können ganz einfach durch das Umbenennen der Datei module.xml in z.B. module_.xml deaktiviert werden.
+
+
+// Definierung der Suchpfade in einem Array
+
+$paths = array(
+
+	// einbinden der ursprünglichen Pfade
+
+    BASE_FOLDER . '/classes/',
+    BASE_FOLDER . '/classes/' . '/converters/',
+    BASE_FOLDER . '/classes/' . '/skins/',
+    BASE_FOLDER . '/classes/' . '/models/',
+    BASE_FOLDER . '/classes/' . '/validators/',
+    BASE_FOLDER . '/classes/' . '/actions/',
+    BASE_FOLDER . '/classes/' . '/services/',
+    BASE_FOLDER . '/classes/' . '/jobs/',
+    BASE_FOLDER . '/classes/' . '/loginmethods/',
+    BASE_FOLDER . '/classes/' . '/evnets/',
+    BASE_FOLDER . '/classes/' . '/plugins/',
+
+	// einbinden der Modulpfade
+
+    BASE_FOLDER . '/modules/' . '/actionlogs/',
+    BASE_FOLDER . '/modules/' . '/alltimetable/',
+    BASE_FOLDER . '/modules/' . '/cancellation/',
+    BASE_FOLDER . '/modules/' . '/clubs/',
+    BASE_FOLDER . '/modules/' . '/clubslogo/',
+    BASE_FOLDER . '/modules/' . '/clubsrename/',
+    BASE_FOLDER . '/modules/' . '/core/',
+    BASE_FOLDER . '/modules/' . '/cups/',
+    BASE_FOLDER . '/modules/' . '/facebook/',
+    BASE_FOLDER . '/modules/' . '/firemanagers/',
+    BASE_FOLDER . '/modules/' . '/fireplayer/',
+    BASE_FOLDER . '/modules/' . '/formation/',
+    BASE_FOLDER . '/modules/' . '/formauthentication/',
+    BASE_FOLDER . '/modules/' . '/freeclubs/',
+
+    BASE_FOLDER . '/modules/' . '/friendlies/',
+
+    BASE_FOLDER . '/modules/' . '/frontend/',
+    BASE_FOLDER . '/modules/' . '/frontendads/',
+    BASE_FOLDER . '/modules/' . '/generator/',
+    BASE_FOLDER . '/modules/' . '/googleplus/',
+    BASE_FOLDER . '/modules/' . '/gravatar/',
+    BASE_FOLDER . '/modules/' . '/halloffame/',
+    BASE_FOLDER . '/modules/' . '/help/',
+    BASE_FOLDER . '/modules/' . '/joomlalogin/',
+    BASE_FOLDER . '/modules/' . '/languageswitcher/',
+    BASE_FOLDER . '/modules/' . '/leagues/',
+    BASE_FOLDER . '/modules/' . '/lending/',
+    BASE_FOLDER . '/modules/' . '/matches/',
+    BASE_FOLDER . '/modules/' . '/messages/',
+    BASE_FOLDER . '/modules/' . '/moneytransactions/',
+    BASE_FOLDER . '/modules/' . '/nationalteams/',
+    BASE_FOLDER . '/modules/' . '/news/',
+    BASE_FOLDER . '/modules/' . '/notifications/',
+    BASE_FOLDER . '/modules/' . '/office/',
+    BASE_FOLDER . '/modules/' . '/players/',
+    BASE_FOLDER . '/modules/' . '/playerssearch/',
+    BASE_FOLDER . '/modules/' . '/premium/',
+    BASE_FOLDER . '/modules/' . '/premiummicropayment/',
+    BASE_FOLDER . '/modules/' . '/premiumpaypal/',
+    BASE_FOLDER . '/modules/' . '/premiumsofortcom/',
+    BASE_FOLDER . '/modules/' . '/profile/',
+    BASE_FOLDER . '/modules/' . '/randomevents/',
+    BASE_FOLDER . '/modules/' . '/rss/',
+    BASE_FOLDER . '/modules/' . '/season/',
+    BASE_FOLDER . '/modules/' . '/shoutbox/',
+    BASE_FOLDER . '/modules/' . '/simulation/',
+    BASE_FOLDER . '/modules/' . '/socialrecommendations/',
+    BASE_FOLDER . '/modules/' . '/sponsor/',
+    BASE_FOLDER . '/modules/' . '/stadium/',
+    BASE_FOLDER . '/modules/' . '/stadiumenvironment/',
+    BASE_FOLDER . '/modules/' . '/statistics/',
+    BASE_FOLDER . '/modules/' . '/tables/',
+    BASE_FOLDER . '/modules/' . '/teamofday/',
+    BASE_FOLDER . '/modules/' . '/termsandconditions/',
+    BASE_FOLDER . '/modules/' . '/training/',
+    BASE_FOLDER . '/modules/' . '/trainingcamp/',
+    BASE_FOLDER . '/modules/' . '/transfermarket/',
+    BASE_FOLDER . '/modules/' . '/transferoffers/',
+    BASE_FOLDER . '/modules/' . '/transfers/',
+    BASE_FOLDER . '/modules/' . '/userabsence/',
+    BASE_FOLDER . '/modules/' . '/userauthentication/',
+    BASE_FOLDER . '/modules/' . '/userbadges/',
+    BASE_FOLDER . '/modules/' . '/userregistration/',
+    BASE_FOLDER . '/modules/' . '/users/',
+    BASE_FOLDER . '/modules/' . '/usersonline/',
+    BASE_FOLDER . '/modules/' . '/webjobexecution/',
+    BASE_FOLDER . '/modules/' . '/wordpresslogin/',
+    BASE_FOLDER . '/modules/' . '/youth/',
+);
+	// Pfade werden zur Verfügung gestellt
+
+set_include_path(implode(PATH_SEPARATOR, $paths));
+
+	// gefundene Klassen werden eingebunden
+
+@include( $class . '.class.php');
 }
+
+// End - altrtnative Class-Loader-Structur - by ErdemCan
+
 spl_autoload_register('classes_autoloader');
 
 // constants
