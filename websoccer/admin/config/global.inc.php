@@ -3,19 +3,19 @@
 
   This file is part of OpenWebSoccer-Sim.
 
-  OpenWebSoccer-Sim is free software: you can redistribute it 
-  and/or modify it under the terms of the 
-  GNU Lesser General Public License 
+  OpenWebSoccer-Sim is free software: you can redistribute it
+  and/or modify it under the terms of the
+  GNU Lesser General Public License
   as published by the Free Software Foundation, either version 3 of
   the License, or any later version.
 
   OpenWebSoccer-Sim is distributed in the hope that it will be
   useful, but WITHOUT ANY WARRANTY; without even the implied
-  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public 
-  License along with OpenWebSoccer-Sim.  
+  You should have received a copy of the GNU Lesser General Public
+  License along with OpenWebSoccer-Sim.
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
@@ -33,9 +33,9 @@ function classes_autoloader($class) {
 
 
 // alter nun obsoleter Teil
-//	
+//
 //	$subforder = '';
-//	
+//
 //	if (substr($class, -9) === 'Converter') {
 //		$subforder = 'converters/';
 //	} else if (substr($class, -4) === 'Skin') {
@@ -57,7 +57,7 @@ function classes_autoloader($class) {
 //	} else if (substr($class, -6) === 'Plugin') {
 //		$subforder = 'plugins/';
 //	}
-//	
+//
 //	@include(BASE_FOLDER . '/classes/' . $subforder . $class . '.class.php');
 // }
 
@@ -106,9 +106,6 @@ $paths = array(
     BASE_FOLDER . '/modules/' . '/formation/',
     BASE_FOLDER . '/modules/' . '/formauthentication/',
     BASE_FOLDER . '/modules/' . '/freeclubs/',
-
-    BASE_FOLDER . '/modules/' . '/friendlies/',
-
     BASE_FOLDER . '/modules/' . '/frontend/',
     BASE_FOLDER . '/modules/' . '/frontendads/',
     BASE_FOLDER . '/modules/' . '/generator/',
@@ -152,6 +149,9 @@ $paths = array(
     BASE_FOLDER . '/modules/' . '/transfermarket/',
     BASE_FOLDER . '/modules/' . '/transferoffers/',
     BASE_FOLDER . '/modules/' . '/transfers/',
+
+	BASE_FOLDER . '/modules/' . '/tvrechte/',									// Grundgerüst für TV-Vertrag
+
     BASE_FOLDER . '/modules/' . '/userabsence/',
     BASE_FOLDER . '/modules/' . '/userauthentication/',
     BASE_FOLDER . '/modules/' . '/userbadges/',

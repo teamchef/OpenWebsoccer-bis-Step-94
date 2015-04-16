@@ -1,0 +1,15 @@
+Module:	tvrechte		eigenes Modul
+
+<pages>
+	tv													template="tv"							model="TvModel"
+
+<actions>
+	choose-tv 																				controller="ChooseTvController"
+
+Dateien:
+														tv.twig								TvModel.class.php
+
+																						ChooseTvController.class.php
+
+sonstige Dateien:
+																						TvsDataService.class.php

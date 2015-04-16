@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE module SYSTEM "../module.dtd">
+<module version="1.0.0">
+
+    <dependencies>
+        <dependency module="clubs" version="1.0.0"/>
+    </dependencies>
+    
+    <admin>
+        <adminpage
+            id="tv"
+            entity="tv"
+            navcategory="league"
+            permissionrole="r_daten" >
+
+            <entity dbtable="tv AS SponsorTab" >
+
+                <overview delete="true" edit="true" >
+
+                    <column
+                        id="entity_tv_name"
+                        field="SponsorTab.name"
+                        type="text"
+                        sort="true"
+                        filter="true" />
+                    
+                    <column
+                        id="entity_tv_liga_id"
+                        field="LeagueTab.name"
+                        type="text"
+                        sort="true"
+                        filter="true" />
+                    
+                    <column
+                        id="entity_tv_min_platz"
+                        field="SponsorTab.min_platz"
+                        type="number"
+                        sort="true" />
+                    
+                    <column
+                        id="entity_tv_max_teams"
+                        field="SponsorTab.max_teams"
+                        type="number"
+                        sort="true" />
+                    
+                    
+                	<join type="LEFT" jointable="liga AS LeagueTab" joincondition="SponsorTab.liga_id = LeagueTab.id" />
+                </overview>
+
+                <editform>
+                    <field id="name" type="text" required="true" />
+                    <field id="liga_id" type="foreign_key" entity="league" jointable="liga" cascade="delete" labelcolumns="land, name" required="true" />
+					
+					<field id="b_spiel" type="number" required="true" />
+					<field id="b_heimzuschlag" type="number" required="true" />
+					<field id="max_teams" type="number" required="true" />
+					<field id="bild" type="file" />
+					
+                </editform>
+            </entity>
+        </adminpage>
+    </admin>
+    
+  <settings>
+      <setting id="tv_matches" category="game" type="number" default="15" />
+      <setting id="tv_earliest_matchday" category="game" type="number" default="4" />
+  </settings>
+  
+  <actions>
+	<action id="choose-tv" controller="ChooseTvController" role="user">
+	    <param id="id" type="number" required="true" min="1" max="2000000000" />
+	</action>
+	
+  </actions>
+    
+    <pages>
+        <page
+            id="tv"
+            template="tv"
+            model="TvModel"
+            parentItem="office"
+            navitem="true"
+            navweight="5"
+            role="user">
+        </page>
+
+    </pages>
+    
+</module>
