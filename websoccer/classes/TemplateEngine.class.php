@@ -26,6 +26,12 @@ define('SKIN_GLOBAL_NAME', 'skin');
 define('VIEWHANDLER_GLOBAL_NAME', 'viewHandler');
 define('CACHE_FOLDER', BASE_FOLDER . '/cache/templates');
 
+// Start - zusätzliche Definition des Grundpfad zum Hauptmodulordner
+
+define('TEMPLATE_MODUL_FOLDER', BASE_FOLDER . '/modules');
+
+// End - Definition des Grundpfad zum Hauptmodulordner - by ErdemCan
+
 /**
  * Enables skin dependent HTML templating.
  * 
@@ -85,14 +91,110 @@ class TemplateEngine {
 		require_once(BASE_FOLDER . '/lib/Twig/Autoloader.php');
 		Twig_Autoloader::register();
 		
-		// file loader
-		$loader = new Twig_Loader_Filesystem(TEMPLATES_FOLDER . '/' . TEMPLATE_SUBDIR_DEFAULT);
-		
-		$skinSubDir = $this->_skin->getTemplatesSubDirectory();
-		if (strlen($skinSubDir) && $skinSubDir != TEMPLATE_SUBDIR_DEFAULT) {
-			$loader->prependPath(TEMPLATES_FOLDER .'/'. $skinSubDir);
-		}
-		
+//		// file loader
+//		$loader = new Twig_Loader_Filesystem(TEMPLATES_FOLDER . '/' . TEMPLATE_SUBDIR_DEFAULT);
+//		
+//		$skinSubDir = $this->_skin->getTemplatesSubDirectory();
+//		if (strlen($skinSubDir) && $skinSubDir != TEMPLATE_SUBDIR_DEFAULT) {
+//			$loader->prependPath(TEMPLATES_FOLDER .'/'. $skinSubDir);
+//		}
+
+// Start - alternative Template-Loader-Structur
+// Die Templates werden nicht nur in den ursprünglich gesetzten Pfaden gesucht, sondern zusätzlich in den Modulordnern, um bei Bedarf geladen zu werden.
+// Dies ist der 2. Teil, um alle nötigen Dateien eines Moduls im Modulordner packen zu können, was nicht nur die Übersicht erhöht, sondern auch einfacher entwickelt und gepflegt werden kann.
+
+
+// Das Array gibt die zu druchsuchenden Pfade vor, in dem die benötigten Templates stehen und bei Bedarf geladen werden.
+// Das System des Ordners templates mit seinen Subordnern, wurde durch die zugehörige Verteilung der Templates zu den Mmodulen abgelöst.
+// Module können ganz einfach durch das Umbenennen der Datei module.xml in z.B. module_.xml deaktiviert werden.
+
+
+// Definierung der Suchpfade in einem Array
+
+	// einbinden der ursprünglichen Pfade
+
+		$loader = new Twig_Loader_Filesystem(array(
+		TEMPLATES_FOLDER ."/". 'default',
+		TEMPLATES_FOLDER ."/". 'default/blocks',
+		TEMPLATES_FOLDER ."/". 'default/emails',
+		TEMPLATES_FOLDER ."/". 'default/macros',
+		TEMPLATES_FOLDER ."/". 'default/views',
+
+	// einbinden der Modulpfade
+
+		TEMPLATE_MODUL_FOLDER . "/" . 'actionlogs',
+		TEMPLATE_MODUL_FOLDER . "/" . 'alltimetable',
+		TEMPLATE_MODUL_FOLDER . "/" . 'cancellation',
+		TEMPLATE_MODUL_FOLDER . "/" . 'clubs',
+		TEMPLATE_MODUL_FOLDER . "/" . 'clubslogo',
+		TEMPLATE_MODUL_FOLDER . "/" . 'clubsrename',
+		TEMPLATE_MODUL_FOLDER . "/" . 'core',
+		TEMPLATE_MODUL_FOLDER . "/" . 'cups',
+		TEMPLATE_MODUL_FOLDER . "/" . 'facebook',
+		TEMPLATE_MODUL_FOLDER . "/" . 'firemanagers',
+		TEMPLATE_MODUL_FOLDER . "/" . 'fireplayer',
+		TEMPLATE_MODUL_FOLDER . "/" . 'formation',
+		TEMPLATE_MODUL_FOLDER . "/" . 'formauthentication',
+		TEMPLATE_MODUL_FOLDER . "/" . 'freeclubs',
+
+		TEMPLATE_MODUL_FOLDER . "/" . 'friendlies',
+
+		TEMPLATE_MODUL_FOLDER . "/" . 'frontend',
+		TEMPLATE_MODUL_FOLDER . "/" . 'frontendads',
+		TEMPLATE_MODUL_FOLDER . "/" . 'generator',
+		TEMPLATE_MODUL_FOLDER . "/" . 'googleplus',
+		TEMPLATE_MODUL_FOLDER . "/" . 'gravatar',
+		TEMPLATE_MODUL_FOLDER . "/" . 'halloffame',
+		TEMPLATE_MODUL_FOLDER . "/" . 'help',
+		TEMPLATE_MODUL_FOLDER . "/" . 'joomlalogin',
+		TEMPLATE_MODUL_FOLDER . "/" . 'languageswitcher',
+		TEMPLATE_MODUL_FOLDER . "/" . 'leagues',
+		TEMPLATE_MODUL_FOLDER . "/" . 'lending',
+		TEMPLATE_MODUL_FOLDER . "/" . 'matches',
+		TEMPLATE_MODUL_FOLDER . "/" . 'messages',
+		TEMPLATE_MODUL_FOLDER . "/" . 'moneytransactions',
+		TEMPLATE_MODUL_FOLDER . "/" . 'nationalteams',
+		TEMPLATE_MODUL_FOLDER . "/" . 'news',
+		TEMPLATE_MODUL_FOLDER . "/" . 'notifications',
+		TEMPLATE_MODUL_FOLDER . "/" . 'office',
+		TEMPLATE_MODUL_FOLDER . "/" . 'players',
+		TEMPLATE_MODUL_FOLDER . "/" . 'playerssearch',
+		TEMPLATE_MODUL_FOLDER . "/" . 'premium',
+		TEMPLATE_MODUL_FOLDER . "/" . 'premiummicropayment',
+		TEMPLATE_MODUL_FOLDER . "/" . 'premiumpaypal',
+		TEMPLATE_MODUL_FOLDER . "/" . 'premiumsofortcom',
+		TEMPLATE_MODUL_FOLDER . "/" . 'profile',
+		TEMPLATE_MODUL_FOLDER . "/" . 'randomevents',
+		TEMPLATE_MODUL_FOLDER . "/" . 'rss',
+		TEMPLATE_MODUL_FOLDER . "/" . 'season',
+		TEMPLATE_MODUL_FOLDER . "/" . 'shoutbox',
+		TEMPLATE_MODUL_FOLDER . "/" . 'simulation',
+		TEMPLATE_MODUL_FOLDER . "/" . 'socialrecommendations',
+		TEMPLATE_MODUL_FOLDER . "/" . 'sponsor',
+		TEMPLATE_MODUL_FOLDER . "/" . 'stadium',
+		TEMPLATE_MODUL_FOLDER . "/" . 'stadiumenvironment',
+		TEMPLATE_MODUL_FOLDER . "/" . 'statistics',
+		TEMPLATE_MODUL_FOLDER . "/" . 'tables',
+		TEMPLATE_MODUL_FOLDER . "/" . 'teamofday',
+		TEMPLATE_MODUL_FOLDER . "/" . 'termsandconditions',
+		TEMPLATE_MODUL_FOLDER . "/" . 'training',
+		TEMPLATE_MODUL_FOLDER . "/" . 'trainingcamp',
+		TEMPLATE_MODUL_FOLDER . "/" . 'transfermarket',
+		TEMPLATE_MODUL_FOLDER . "/" . 'transferoffers',
+		TEMPLATE_MODUL_FOLDER . "/" . 'transfers',
+		TEMPLATE_MODUL_FOLDER . "/" . 'userabsence',
+		TEMPLATE_MODUL_FOLDER . "/" . 'userauthentication',
+		TEMPLATE_MODUL_FOLDER . "/" . 'userbadges',
+		TEMPLATE_MODUL_FOLDER . "/" . 'userregistration',
+		TEMPLATE_MODUL_FOLDER . "/" . 'users',
+		TEMPLATE_MODUL_FOLDER . "/" . 'usersonline',
+		TEMPLATE_MODUL_FOLDER . "/" . 'webjobexecution',
+		TEMPLATE_MODUL_FOLDER . "/" . 'youth'
+		 )
+		);
+
+// End - altrtnative Template-Loader-Structur - by ErdemCan
+
 		// environment config
 		$twigConfig = array(
 				'cache' => CACHE_FOLDER,
