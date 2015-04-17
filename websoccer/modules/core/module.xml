@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE module SYSTEM "../module.dtd">
 <module version="2.0.0">
-  
+
   <admin>
 	<adminpage id="all_settings" permissionrole="r_admin" navcategory="settings" filename="all_settings"/>
 	<adminpage id="all_logging" permissionrole="r_admin" navcategory="settings" filename="all_logging"/>
 	<adminpage id="entitylogging" permissionrole="r_admin" navcategory="settings" filename="entitylogging"/>
 	<adminpage id="jobs" permissionrole="r_admin" navcategory="settings" filename="jobs"/>
-	
+
 	<adminpage id="admin" permissionrole="r_adminuser" navcategory="website" entity="admin">
 		<entity dbtable="admin">
 		    <overview edit="true" delete="true">
 		    	<column id="entity_admin_name" type="text" field="name" filter="true" sort="true" />
-		    	<column id="entity_admin_email" type="email" field="email" filter="true" /> 
-		    	<column id="entity_admin_r_admin" type="boolean" field="r_admin" filter="true" /> 
+		    	<column id="entity_admin_email" type="email" field="email" filter="true" />
+		    	<column id="entity_admin_r_admin" type="boolean" field="r_admin" filter="true" />
 		    </overview>
 		    <editform>
 				<field id="name" type="text" required="true" />
@@ -26,13 +26,13 @@
 				<field id="r_staerken" type="boolean" />
 				<field id="r_spiele" type="boolean" />
 				<field id="r_news" type="boolean" />
-				<field id="r_demo" type="boolean" />		        
+				<field id="r_demo" type="boolean" />
 		    </editform>
-		    
-		</entity>    
-	</adminpage>	
+
+		</entity>
+	</adminpage>
   </admin>
-  
+
   <settings>
       <setting id="projectname" category="general" type="text" default="H&amp;H WebSoccer Sim 3" />
       <setting id="context_root" category="general" type="text" default="" />
@@ -52,5 +52,13 @@
       <setting id="offline" category="offlinemode" type="select" selection="online,offline" default="online" />
       <setting id="offline_text" category="offlinemode" type="textarea" default="We are offline at the moment." />
       <setting id="offline_times" category="offlinemode" type="tags" default="" />
+
+      <setting id="addplyr" category="" type="text" default="AddPlayerWithoutTeamToTransfermarketJob" />
+      <setting id="extransf" category="" type="text" default="ExecuteTransfersJob" />
+      <setting id="sim" category="" type="text" default="SimulateMatchesJob" />
+      <setting id="usractv" category="" type="text" default="UserInactivityCheckJob" />
+      <setting id="stats" category="" type="text" default="UpdateStatisticsJob" />
+      <setting id="stadium" category="" type="text" default="AcceptStadiumConstructionWorkJob" />
+
   </settings>
 </module>

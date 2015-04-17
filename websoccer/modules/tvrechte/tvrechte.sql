@@ -1,4 +1,4 @@
-﻿/* TC-Vertrag SQL Tabelleneintrag setzen */;
+/* TV-Vertrag SQL Tabelleneintrag setzen */;
 
 
 CREATE TABLE IF NOT EXISTS `_tvrechte` (
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS `_tvrechte` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
 
-/* TC-Vertrag SQL Tabelleneintrag-Erweiterung für den Table _verien setzen */;
+/* TV-Vertrag SQL Tabelleneintrag-Erweiterung f�r den Table _verien setzen */;
 
 
 ALTER TABLE _verein ADD tv_spiele smallint(5) NOT NULL;
