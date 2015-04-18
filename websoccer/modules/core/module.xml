@@ -53,12 +53,12 @@
       <setting id="offline_text" category="offlinemode" type="textarea" default="We are offline at the moment." />
       <setting id="offline_times" category="offlinemode" type="tags" default="" />
 
-      <setting id="addplyr" category="" type="text" default="AddPlayerWithoutTeamToTransfermarketJob" />
-      <setting id="extransf" category="" type="text" default="ExecuteTransfersJob" />
-      <setting id="sim" category="" type="text" default="SimulateMatchesJob" />
-      <setting id="usractv" category="" type="text" default="UserInactivityCheckJob" />
-      <setting id="stats" category="" type="text" default="UpdateStatisticsJob" />
-      <setting id="stadium" category="" type="text" default="AcceptStadiumConstructionWorkJob" />
+      <setting id="addplyr" category="jobs" type="text" default="AddPlayerWithoutTeamToTransfermarketJob" />
+      <setting id="extransf" category="jobs" type="text" default="ExecuteTransfersJob" />
+      <setting id="sim" category="jobs" type="text" default="SimulateMatchesJob" />
+      <setting id="usractv" category="jobs" type="text" default="UserInactivityCheckJob" />
+      <setting id="stats" category="jobs" type="text" default="UpdateStatisticsJob" />
+      <setting id="stadium" category="jobs" type="text" default="AcceptStadiumConstructionWorkJob" />
 
   </settings>
 </module>
