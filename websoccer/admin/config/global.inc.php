@@ -31,37 +31,6 @@ if (DEBUG) {
 // loads required classes on demand
 function classes_autoloader($class) {
 
-
-// alter nun obsoleter Teil
-//
-//	$subforder = '';
-//
-//	if (substr($class, -9) === 'Converter') {
-//		$subforder = 'converters/';
-//	} else if (substr($class, -4) === 'Skin') {
-//		$subforder = 'skins/';
-//	} else if (substr($class, -5) === 'Model') {
-//		$subforder = 'models/';
-//	} else if (substr($class, -9) === 'Validator') {
-//		$subforder = 'validators/';
-//	} else if (substr($class, -10) === 'Controller') {
-//		$subforder = 'actions/';
-//	} else if (substr($class, -7) === 'Service') {
-//		$subforder = 'services/';
-//	} else if (substr($class, -3) === 'Job') {
-//		$subforder = 'jobs/';
-//	} else if (substr($class, -11) === 'LoginMethod') {
-//		$subforder = 'loginmethods/';
-//	} else if (substr($class, -5) === 'Event') {
-//		$subforder = 'events/';
-//	} else if (substr($class, -6) === 'Plugin') {
-//		$subforder = 'plugins/';
-//	}
-//
-//	@include(BASE_FOLDER . '/classes/' . $subforder . $class . '.class.php');
-// }
-
-
 // Start - alternative Class-Loader-Structur
 // Die Klassen werden nicht nur in den ursprünglich gesetzten Pfaden gesucht, sondern zusätzlich in den Modulordnern, um bei Bedarf geladen zu werden.
 // Dies ist der 1. Teil, um alle nötigen Dateien eines Moduls im Modulordner packen zu können, was nicht nur die Übersicht erhöht, sondern auch einfacher entwickelt und gepflegt werden kann.
@@ -149,9 +118,6 @@ $paths = array(
     BASE_FOLDER . '/modules/' . '/transfermarket/',
     BASE_FOLDER . '/modules/' . '/transferoffers/',
     BASE_FOLDER . '/modules/' . '/transfers/',
-
-	BASE_FOLDER . '/modules/' . '/tvrechte/',									// Grundgerüst für TV-Vertrag
-
     BASE_FOLDER . '/modules/' . '/userabsence/',
     BASE_FOLDER . '/modules/' . '/userauthentication/',
     BASE_FOLDER . '/modules/' . '/userbadges/',
@@ -171,7 +137,7 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 @include( $class . '.class.php');
 }
 
-// End - altrtnative Class-Loader-Structur - by ErdemCan
+// End - altrtnative Class-Loader-Structur - by Rolf Joseph / ErdemCan
 
 spl_autoload_register('classes_autoloader');
 

@@ -1,21 +1,21 @@
-﻿<?php 
+﻿<?php
 /******************************************************
 
   This file is part of OpenWebSoccer-Sim.
 
-  OpenWebSoccer-Sim is free software: you can redistribute it 
-  and/or modify it under the terms of the 
-  GNU Lesser General Public License 
+  OpenWebSoccer-Sim is free software: you can redistribute it
+  and/or modify it under the terms of the
+  GNU Lesser General Public License
   as published by the Free Software Foundation, either version 3 of
   the License, or any later version.
 
   OpenWebSoccer-Sim is distributed in the hope that it will be
   useful, but WITHOUT ANY WARRANTY; without even the implied
-  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public 
-  License along with OpenWebSoccer-Sim.  
+  You should have received a copy of the GNU Lesser General Public
+  License along with OpenWebSoccer-Sim.
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
@@ -31,22 +31,22 @@ define("DDL_MIGRATION", "ws3_ddl_upgrade.sql");
 define("DDL_INDEX", "ws3_ddl_index.sql");
 
 session_start();
-$supportedLanguages = array("de" => "Deutsch", "en" => "English");
+$supportedLanguages = array("de" => "Deutsch");
 
 ignore_user_abort(TRUE);
 set_time_limit(0);
 
-include(BASE_FOLDER . "/classes/DbConnection.class.php");
-include(BASE_FOLDER . "/classes/SecurityUtil.class.php");
+include(BASE_FOLDER . "/modules/core/DbConnection.class.php");
+include(BASE_FOLDER . "/modules/core/SecurityUtil.class.php");
 
 /**
  * Step 1: Welcome Screen -> Language Selection
  */
 function printWelcomeScreen() {
 	global $supportedLanguages;
-	
-	echo "<h2>Sprache wählen / Choose language</h2>";
-	
+
+	echo "<h2>Sprache</h2>";
+
 	echo "<form method=\"post\">";
 	$first = TRUE;
 	foreach ($supportedLanguages as $langId => $langLabel) {
@@ -59,8 +59,8 @@ function printWelcomeScreen() {
 		echo "> $langLabel";
 		echo "</label>";
 	}
-	
-	echo "<button type=\"submit\" class=\"btn\">Wählen / Choose</button>";
+
+	echo "<button type=\"submit\" class=\"btn\">weiter</button>";
 	echo "<input type=\"hidden\" name=\"action\" value=\"actionSetLanguage\">";
 	echo "</form>";
 }
@@ -71,14 +71,14 @@ function actionSetLanguage() {
 		$errors[] = "Please select a language.";
 		return "printWelcomeScreen";
 	}
-	
+
 	global $supportedLanguages;
 	$lang = $_POST["lang"];
 	if (key_exists($lang, $supportedLanguages)) {
 		$_SESSION["lang"] = $lang;
 		return "printSystemCheck";
 	}
-	
+
 	return "printWelcomeScreen";
 }
 
@@ -87,41 +87,41 @@ function actionSetLanguage() {
  */
 function printSystemCheck($messages) {
 	echo "<h2>". $messages["check_title"] . "</h2>";
-	
+
 	$requirments = array();
-	
+
 	$requirments[] = array(
 			"requirement" => $messages["check_req_php"],
 			"min" => PHP_MIN_VERSION,
 			"actual" => PHP_VERSION,
 			"status" => (version_compare(PHP_VERSION, PHP_MIN_VERSION) > -1) ? "success" : "error"
 	);
-	
+
 	$requirments[] = array(
 			"requirement" => $messages["check_req_json"],
 			"min" => $messages["check_req_yes"],
 			"actual" => (function_exists("json_encode")) ? $messages["check_req_yes"] : $messages["check_req_no"],
 			"status" => (function_exists("json_encode")) ? "success" : "error"
 	);
-	
+
 	$requirments[] = array(
 			"requirement" => $messages["check_req_gd"],
 			"min" => $messages["check_req_yes"],
 			"actual" => (function_exists("getimagesize")) ? $messages["check_req_yes"] : $messages["check_req_no"],
 			"status" => (function_exists("getimagesize")) ? "success" : "error"
 	);
-	
+
 	$requirments[] = array(
 			"requirement" => $messages["check_req_safemode"],
 			"min" => $messages["check_req_off"],
 			"actual" => (!ini_get('safe_mode')) ? $messages["check_req_off"] : $messages["check_req_on"],
 			"status" => (!ini_get('safe_mode')) ? "success" : "error"
 	);
-	
+
 	$writableFiles = explode(",", WRITABLE_FOLDERS);
 	foreach ($writableFiles as $writableFile) {
 		$file = BASE_FOLDER . "/" . $writableFile;
-		
+
 		$requirments[] = array(
 				"requirement" => $messages["check_req_writable"] . " <i>" . $writableFile . "</i>",
 				"min" => $messages["check_req_yes"],
@@ -129,9 +129,9 @@ function printSystemCheck($messages) {
 				"status" => (is__writable($file)) ? "success" : "error"
 		);
 	}
-	
+
 	?>
-	
+
 	<table class="table">
 		<thead>
 			<tr>
@@ -141,7 +141,7 @@ function printSystemCheck($messages) {
 			</tr>
 		</thead>
 		<tbody>
-		<?php 
+		<?php
 		$valid = TRUE;
 		foreach($requirments as $requirement) {
 			echo "<tr class=\"".  $requirement["status"] . "\">";
@@ -149,7 +149,7 @@ function printSystemCheck($messages) {
 			echo "<td>" . $requirement["min"] . "</td>";
 			echo "<td>" . $requirement["actual"] . "</td>";
 			echo "</tr>";
-			
+
 			if ($requirement["status"] == "error") {
 				$valid = FALSE;
 			}
@@ -157,9 +157,9 @@ function printSystemCheck($messages) {
 		?>
 		</tbody>
 	</table>
-	
-	<?php 
-	
+
+	<?php
+
 	if ($valid) {
 		echo "<form method=\"post\">";
 		echo "<button type=\"submit\" class=\"btn\">". $messages["button_next"] . "</button>";
@@ -180,11 +180,11 @@ function actionGotoConfig() {
 function printConfigForm($messages) {
 
 	?>
-	
+
 	<form method="post" class="form-horizontal">
 		<fieldset>
 			<legend><?php echo $messages["config_formtitle"] ?></legend>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="db_host"><?php echo $messages["label_db_host"] ?></label>
 			    <div class="controls">
@@ -193,7 +193,7 @@ function printConfigForm($messages) {
 			      <span class="help-inline"><?php echo $messages["label_db_host_help"] ?></span>
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="db_name"><?php echo $messages["label_db_name"] ?></label>
 			    <div class="controls">
@@ -201,7 +201,7 @@ function printConfigForm($messages) {
 			      	value="<?php echo (isset($_POST["db_name"])) ? $_POST["db_name"] : ""; ?>">
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="db_user"><?php echo $messages["label_db_user"] ?></label>
 			    <div class="controls">
@@ -209,7 +209,7 @@ function printConfigForm($messages) {
 			      	value="<?php echo (isset($_POST["db_user"])) ? $_POST["db_user"] : ""; ?>">
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="db_password"><?php echo $messages["label_db_password"] ?></label>
 			    <div class="controls">
@@ -217,7 +217,7 @@ function printConfigForm($messages) {
 			      	value="<?php echo (isset($_POST["db_password"])) ? $_POST["db_password"] : ""; ?>">
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="db_prefix"><?php echo $messages["label_db_prefix"] ?></label>
 			    <div class="controls">
@@ -226,9 +226,9 @@ function printConfigForm($messages) {
 			      <span class="help-inline"><?php echo $messages["label_db_prefix_help"] ?></span>
 			    </div>
 			</div>
-			
+
 			<hr>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="projectname"><?php echo $messages["label_projectname"] ?></label>
 			    <div class="controls">
@@ -237,7 +237,7 @@ function printConfigForm($messages) {
 			      <span class="help-inline"><?php echo $messages["label_projectname_help"] ?></span>
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="projectname"><?php echo $messages["label_systememail"] ?></label>
 			    <div class="controls">
@@ -246,9 +246,9 @@ function printConfigForm($messages) {
 			      <span class="help-inline"><?php echo $messages["label_systememail_help"] ?></span>
 			    </div>
 			</div>
-			
+
 			<?php $defaultUrl = "http://" . $_SERVER["HTTP_HOST"]; ?>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="url"><?php echo $messages["label_url"] ?></label>
 			    <div class="controls">
@@ -257,7 +257,7 @@ function printConfigForm($messages) {
 			      	<span class="help-inline"><?php echo $messages["label_url_help"] ?></span>
 			    </div>
 			</div>
-			
+
 			<?php $defaultRoot = substr($_SERVER["REQUEST_URI"], 0, strrpos($_SERVER["REQUEST_URI"], "/install")); ?>
 			<div class="control-group">
 			    <label class="control-label" for="context_root"><?php echo $messages["label_context_root"] ?></label>
@@ -267,36 +267,36 @@ function printConfigForm($messages) {
 			      	<span class="help-inline"><?php echo $messages["label_context_root_help"] ?></span>
 			    </div>
 			</div>
-			
-			
+
+
 		</fieldset>
-		
+
 		<div class="form-actions">
 		  <button type="submit" class="btn btn-primary"><?php echo $messages["button_next"]; ?></button>
 		</div>
-		
+
 		<input type="hidden" name="action" value="actionSaveConfig">
 	</form>
-	
-	<?php 
+
+	<?php
 }
 
 function actionSaveConfig() {
 	global $errors;
 	global $messages;
-	
+
 	$requiredFields = array("db_host", "db_name", "db_user", "db_password", "projectname", "systememail", "url");
-	
+
 	foreach($requiredFields as $requiredField) {
 		if (!isset($_POST[$requiredField]) || !strlen($_POST[$requiredField])) {
 			$errors[] = $messages["requires_value"] . ": " . $messages["label_" . $requiredField];
 		}
 	}
-	
+
 	if (count($errors)) {
 		return "printConfigForm";
 	}
-	
+
 	// check if already installed
 	if (file_exists(CONFIGFILE)) {
 		include(CONFIGFILE);
@@ -304,7 +304,7 @@ function actionSaveConfig() {
 	if (isset($conf) && count($conf)) {
 		$errors[] = $messages["err_already_installed"];
 	} else {
-	
+
 		// test db connection
 		try {
 			$db = DbConnection::getInstance();
@@ -314,34 +314,34 @@ function actionSaveConfig() {
 			$errors[] = $messages["invalid_db_credentials"];
 		}
 	}
-	
+
 	if (count($errors)) {
 		return "printConfigForm";
 	}
-	
+
 	$prefix = isset($_POST["db_prefix"]) ? $_POST["db_prefix"] : DEFAULT_DB_PREFIX;
-	
+
 	$filecontent = "<?php" . PHP_EOL;
 	$filecontent .= "\$conf['db_host'] = \"". $_POST["db_host"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['db_user'] = \"". $_POST["db_user"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['db_passwort'] = \"". $_POST["db_password"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['db_name'] = \"". $_POST["db_name"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['db_prefix'] = \"". $prefix . "\";" . PHP_EOL;
-	$filecontent .= "\$conf['supported_languages'] = \"de,en\";" . PHP_EOL;
+	$filecontent .= "\$conf['supported_languages'] = \"de\";" . PHP_EOL;
 	$filecontent .= "\$conf['homepage'] = \"". $_POST["url"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['context_root'] = \"". $_POST["context_root"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['projectname'] = \"". $_POST["projectname"] . "\";" . PHP_EOL;
 	$filecontent .= "\$conf['systememail'] = \"". $_POST["systememail"] . "\";" . PHP_EOL;
 	$filecontent .= "?>" . PHP_EOL;
-	
+
 	$fp = fopen(CONFIGFILE, 'w');
 	fwrite($fp, $filecontent);
 	fclose($fp);
-	
+
 	if (file_exists(CONFIGFILE)) {
 		return "printPreDbCreate";
 	}
-	
+
 }
 
 /**
@@ -350,9 +350,9 @@ function actionSaveConfig() {
 function printPreDbCreate($messages) {
 
 	?>
-	
+
 	<h2><?php echo $messages["predb_title"]; ?></h2>
-	
+
 	<form method="post">
 		<label class="radio">
 			<input type="radio" name="install" value="new" checked> <?php echo $messages["predb_label_new"]; ?>
@@ -360,35 +360,35 @@ function printPreDbCreate($messages) {
 		<label class="radio">
 			<input type="radio" name="install" value="migrate"> <?php echo $messages["predb_label_migrate"]; ?>
 		</label>
-		
+
 		<button type="submit" class="btn btn-primary"><?php echo $messages["button_next"]; ?></button>
 		<input type="hidden" name="action" value="actionCreateDb">
 	</form>
-	
+
 	<p><i class="icon-warning-sign"></i> <?php echo $messages["predb_label_warning"]; ?></p>
-	
-	<?php 
+
+	<?php
 }
 
 function actionCreateDb() {
 	include(CONFIGFILE);
-	
+
 	$db = DbConnection::getInstance();
 	$db->connect($conf["db_host"], $conf["db_user"], $conf["db_passwort"], $conf["db_name"]);
-	
+
 	try {
 		if ($_POST["install"] == "new") {
 			loadAndExecuteDdl(DDL_FULL, $conf["db_prefix"], $db);
 		} else {
 			loadAndExecuteDdl(DDL_MIGRATION, $conf["db_prefix"], $db);
 		}
-		
+
 	} catch(Exception $e) {
 		global $errors;
 		$errors[] = $e->getMessage();
 		return "printPreDbCreate";
 	}
-	
+
 	$db->close();
 	return "printCreateUserForm";
 
@@ -396,20 +396,20 @@ function actionCreateDb() {
 
 function loadAndExecuteDdl($file, $prefix, DbConnection $db) {
 	$script = file_get_contents($file);
-	
+
 	// replace prefix
 	if ($prefix !== DEFAULT_DB_PREFIX) {
 		$script = str_replace(DEFAULT_DB_PREFIX . "_", $prefix . "_", $script);
 	}
-	
+
 	$queryResult = $db->connection->multi_query($script);
 	// long script might not be fully executed, hence iterate...
 	while ($db->connection->more_results() && $db->connection->next_result());
-	
+
 	if (!$queryResult) {
 		throw new Exception("Database Query Error: " . $db->connection->error);
 	}
-	
+
 }
 
 /**
@@ -417,11 +417,11 @@ function loadAndExecuteDdl($file, $prefix, DbConnection $db) {
  */
 function printCreateUserForm($messages) {
 	?>
-	
+
 	<form method="post" class="form-horizontal">
 		<fieldset>
 			<legend><?php echo $messages["user_formtitle"] ?></legend>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="name"><?php echo $messages["label_name"] ?></label>
 			    <div class="controls">
@@ -429,7 +429,7 @@ function printCreateUserForm($messages) {
 			      	value="<?php echo (isset($_POST["name"])) ? $_POST["name"] : ""; ?>">
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="password"><?php echo $messages["label_password"] ?></label>
 			    <div class="controls">
@@ -437,7 +437,7 @@ function printCreateUserForm($messages) {
 			      	value="<?php echo (isset($_POST["password"])) ? $_POST["password"] : ""; ?>">
 			    </div>
 			</div>
-			
+
 			<div class="control-group">
 			    <label class="control-label" for="email"><?php echo $messages["label_email"] ?></label>
 			    <div class="controls">
@@ -445,52 +445,52 @@ function printCreateUserForm($messages) {
 			      	value="<?php echo (isset($_POST["email"])) ? $_POST["email"] : ""; ?>">
 			    </div>
 			</div>
-			
+
 		</fieldset>
-		
+
 		<div class="form-actions">
 		  <button type="submit" class="btn btn-primary"><?php echo $messages["button_next"]; ?></button>
 		</div>
-		
+
 		<input type="hidden" name="action" value="actionSaveUser">
 	</form>
-	
-	
-	<?php 
+
+
+	<?php
 }
 
 function actionSaveUser() {
 	global $errors;
 	global $messages;
-	
+
 	$requiredFields = array("name", "password", "email");
-	
+
 	foreach($requiredFields as $requiredField) {
 		if (!isset($_POST[$requiredField]) || !strlen($_POST[$requiredField])) {
 			$errors[] = $messages["requires_value"] . ": " . $messages["label_" . $requiredField];
 		}
 	}
-	
+
 	if (count($errors)) {
 		return "printCreateUserForm";
 	}
-	
+
 	$salt = SecurityUtil::generatePasswordSalt();
 	$password = SecurityUtil::hashPassword($_POST["password"], $salt);
-	
+
 	$columns["name"] = $_POST["name"];
 	$columns["passwort"] = $password;
 	$columns["passwort_salt"] = $salt;
 	$columns["email"] = $_POST["email"];
 	$columns["r_admin"] = "1";
-	
+
 	include(CONFIGFILE);
-	
+
 	$db = DbConnection::getInstance();
 	$db->connect($conf["db_host"], $conf["db_user"], $conf["db_passwort"], $conf["db_name"]);
-	
+
 	$db->queryInsert($columns, $conf["db_prefix"] . "_admin");
-	
+
 	return "printFinalPage";
 }
 
@@ -500,13 +500,13 @@ function actionSaveUser() {
 function printFinalPage($messages) {
 	include(CONFIGFILE);
 	?>
-	
+
 	<div class="alert alert-success"><strong><?php echo $messages["final_success_alert"]; ?></strong></div>
-	
+
 	<div class="alert"><strong><?php echo $messages["final_success_note"]; ?></strong></div>
-	
+
 	<p><i class="icon-arrow-right"></i> <a href="<?php echo $conf["context_root"]; ?>/admin"><?php echo $messages["final_link"]; ?></a></p>
-	<?php 
+	<?php
 }
 ?>
 <!DOCTYPE html>
@@ -524,74 +524,81 @@ function printFinalPage($messages) {
     </style>
   </head>
   <body>
-  
-	<div class="container">
-	
-		<h1>OpenWebSoccer-Sim Installation</h1>
-		
-		<hr>
-		
-		<?php 
 
-		if (version_compare(PHP_VERSION, '5.3.0') < 0 ) {
-			echo 'Es wird mindestens PHP 5.3.0 benötigt, es ist installiert die Version: ' . PHP_VERSION;
-			?>
-			echo '<p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a></p>
-			<?php
+	<div class="container">
+
+		<h1>OpenWebSoccer-Sim Installation</h1>
+
+		<hr>
+
+		<?php
+
+		// Start - PHP-Vorababfrage mit Hinweisen
+
+		if (strnatcmp(phpversion(),'5.3.1')<= 0) {
+			echo 'Es muss mindestens PHP 5.3.0 sein, es ist die Version: ' . PHP_VERSION . ' installiert.' ;
+			echo '<p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a></p>';
+			echo '<p>Fork-Version "Open Websoocer-Sim / TLC " Co-Powered by Rolf Joseph / ErdemCan</p>';
 			exit;
 		}
 
-		if (version_compare(PHP_VERSION, '5.7.0', '>=')) {
-			echo 'Ihre PHP Version' . PHP_VERSION . ' ist zu hoch, daher funktioniert die Installation wohl möglich nicht nicht.';
+		else if (version_compare(PHP_VERSION, '5.7.0', '>=')) {
+			echo 'Ihre PHP Version ' . PHP_VERSION . ' ist zu hoch, daher funktioniert die Installation eventuell nicht.';
 		}
 
-		
+		else {
+			echo 'Ihre PHP Version ist ' . PHP_VERSION . ' und die Installation kann beginnen.';
+		}
+
+		// Ende - PHP-Vorababfrage mit Hinweisen - by Rolf Josaeph / ErdemCan
+
 		$errors = array();
-		
+
 		$messagesIncluded = FALSE;
 		if(isset($_SESSION["lang"])) {
 			include("messages_" . $_SESSION["lang"] . ".inc.php");
 			$messagesIncluded = $_SESSION["lang"];
 		}
-		
+
 		$action = (isset($_REQUEST["action"])) ? $_REQUEST["action"] : "";
 		if (!strlen($action) || substr($action, 0, 6) !== "action") {
 			$view = "printWelcomeScreen";
 		} else {
 			$view = $action();
 		}
-		
+
 		if(isset($_SESSION["lang"]) && $_SESSION["lang"] !== $messagesIncluded) {
 			include("messages_" . $_SESSION["lang"] . ".inc.php");
 		}
-		
+
 		if (count($errors)) {
 			foreach($errors as $error) {
 				echo "<div class=\"alert alert-error\">$error</div>";
 			}
 		}
-		
+
 		if (isset($messages)) {
 			$view($messages);
 		} else {
 			$view();
 		}
-		
+
 		?>
-	  
+
       <hr>
 
       <footer>
         <p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a></p>
-      </footer>		  
+	<p>Fork-Version "Open Websoocer-Sim / TLC " Co-Powered by Rolf Joseph / ErdemCan</a></p>
+      </footer>
 	</div>
-	
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="../admin/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
 
-<?php 
+<?php
 // real is_writable (http://www.php.net/manual/en/function.is-writable.php#73596)
 function is__writable($path) {
 	//will work in despite of Windows ACLs bug

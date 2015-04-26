@@ -1,25 +1,56 @@
-# OpenWebSoccer-Sim - Start your own Online Football Manager!
+# OpenWebSoccer-Sim / TLC Version by Rolf Joseph / ErdemCan - Starten Sie Ihren eigenen Online-Fußball-Manager !
 
-With with PHP based web application your website visitors can manage a virtual fantasy football (soccer) team and play with it against other users. 
-They set the tactics for the next match, trade players, train their team, look for new talents in their youth section or extend their stadium. 
-The software simulates all matches automatically and in real-time. It produces match reports with a live ticker similar to what you know from popular news websites. 
-Setup your own football online game in order to attract new website visitors, make money through premium features or for playing against colleagues in your company intranet.
+Mit dieser PHP-basierten Web-Anwendung können sie Ihren Website-Besuchern einen virtuellen Fantasy-Fußball-Manager anbieten.
 
-**[Download now!](https://github.com/ihofmann/open-websoccer/releases)**
+Sie setzen die Taktik für das nächste Spiel, erwerben oder bieten Spieler auf dem Transfermarkt, trainieren Ihre Mannschaft.
+Suchen Sie nach neuen Talenten in der Jugendabteilung oder erweitern ihre Stadion.
+
+Die Software simuliert alle Spiele automatisch und in Echtzeit. Der Spielbericht, einem Live-Ticker ähnlich, begleitet das
+Live-Spiel, wo der User Live in das Spiel eingreifen kann.
+
+Viele Optinonen und viele Einstellungsmöglichkeiten runden die Open Websoccer-Sim ab.
+
+## Die TLC-Version beinhaltet zur Zeit folgende Änderungen bzw. Erweiterungen
+
+Die neue Core-Struktur bietet eine einfache Entwicklung. Änderungen an den Orginal-Dateien bzw. Erweiterungen mittels extend
+sind daher nicht mehr nötig und erhöhen damit die Stabilität. Legen Sie eine bearbeitete Kopie der Datei in die ürsprünglichen
+Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
+
+- Die Null-Byte-Dateien wurden entfernt und in der lockfile.txt Versionsinformationen eingefügt
+- alle Dateien aus dem Verzeichniss classes wurden den Modulen im Ordner modules zugeordnet
+- die Datei global.inc.php wurde angepasst und ersetzt die original Datei
+- alle Dateein aus dem Verzeichnis templates/default wurden den Mmodulen im Ordner modules zugeordnet
+- die Datei TemplateEngine.class.php wurde angepasst und ersetzt ebenfalls die original Datei
+- für die Zuordnung der Dateien zu den Modulen wurde eine Batch-Datei ersellt, siehe im Ordner websoccer-tools
+- die Installationsführung wurde angepasst, so das sich nun Fragen dazu erübrigen dürften
+- entsprechend wurde die Datei websoccer/install/index.php angepasst
+- alternative job.php im Hauptverzeichnis ( Parameter werden über die Konfiguration gesteuert )
+- Anpassung der modul.xml und der adminmessages_de.xml im Modul core für die alternative job.php
+- Anpassung in der layout.twig wegen des Hinweis auf die Version
+- Anpassung der Datei websoccer/admin/config/version.txt auf Open Websoocer-Sim / TLC 1.0
 
 
-## Successor of HSE WebSoccer-Sim
-
-OpenWebSoccer-Sim is the official successor of the commercial products _H&H WebSoccer_ and _HSE WebSoccer-Sim_. 
-It is maintained by Ingo Hofmann, a professional software engineer from Switzerland, who has developed the first version of the software in 2003. 
-Ingo is very happy about support from other developers! If you feel like working on a new challenge in your leisure time, please feel free to contribute code or ideas.
-
-You can reach Ingo via: Ingo ( at ) websoccer- sim.com.
+Das Verzeichnis kann nun auch als Update genutzt werden. Die gesetzte Konfiguration wird nun nicht mehr überschrieben, da die
+Datei config.inc.php nicht mehr mitgeliefert wird.
 
 
-## Documentation and Issue Tracker
+## Dieser Ableger basiert auf der Open Websoccer-Sim, die sie hier bekommen:
 
-Find out how you install, setup and enhance the software at the [Wiki](https://github.com/ihofmann/open-websoccer/wiki/00.-Home).
+** [Jetzt downloaden!] (Https://github.com/ihofmann/open-websoccer/releases) **
 
-You found a bug or have an idea for a new feature? Then don't hesitate to open an issue at the [Issue Tracker](https://github.com/ihofmann/open-websoccer/issues).
 
+## Nachfolger des HSE WebSoccer-Sim
+
+OpenWebSoccer-Sim ist der offizielle Nachfolger der kommerziellen Produkte _H & H WebSoccer_ und _HSE WebSoccer-Sim_.
+Herr Ingo Hofmann ist ein professionellen Software-Ingenieur aus der Schweiz, der die erste Version der Software im Jahr 2003 entwickelt hat.
+
+Die Unterstützung von anderen Entwicklern mit Erweiterungen oder Ideen ist der Grund das der Websoccer nun OpenSource ist.
+
+Sie können über Ingo erreichen: Ingo (at) websoccer- sim.com.
+
+
+## Dokumentation und Issue Tracker in englischer Sprache
+
+Hinweise zur Installation, Konfiguration und zur Verbesserung der Software in der [Wiki] (https://github.com/ihofmann/open-websoccer/wiki/00.-Home).
+
+Haben Sie einen Fehler gefunden oder haben eine Idee für ein neues Feature? Dann zögern Sie nicht, ein Problem über der [Issue Tracker] zu eröffnen (https://github.com/ihofmann/open-websoccer/issues).
