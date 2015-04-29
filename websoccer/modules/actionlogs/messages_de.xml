@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE messages SYSTEM "../messages.dtd">
 <messages>
 	<message id="activities_tab">Aktivität</message>
@@ -20,4 +20,7 @@
 	<message id="activitylog_directtransfer-offer">%s hat ein Spielerkaufangebot eingereicht.</message>
 	<message id="activitylog_report-absence">%s hat sich als abwesend gemeldet.</message>
 	<message id="activitylog_return-from-absence">%s ist wieder zurück.</message>
+
+	<message id="allaktivities_navlabel">Alle User Akrtivitäten</message>
+	<message id="admin">Zugriff nur für den Admin !</message>
 </messages>
