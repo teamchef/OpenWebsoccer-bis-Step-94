@@ -31,9 +31,11 @@ Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
 
 29.04.2015 Neu:
 
-- zusätzliche Vor- und Nachnahme für Frankreich, Japan Männer & Frauen ( die häufigsten Namen )
+- zusätzliche Vor- und Nachnahme-Dateien für Frankreich, Japan Männer & Frauen
 - Actionlogs: mit Datumsanzeige & Uhrzeit
 - Actionlogs: zusätzlicher Seite im Frontend für den Admin zur Anzeige aller verfügbaren Aktivitäten
+- die urspünglichen Ordner bleiben für Eure eigenen Anpassungen & Test leer
+- Updates werden in den Core integriert und überschreiben somit nicht Eure Änderungen und Erweiterungen
 
 
 Das Verzeichnis kann nun auch als Update genutzt werden. Die gesetzte Konfiguration wird nun nicht mehr überschrieben, da die
