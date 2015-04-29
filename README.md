@@ -31,7 +31,7 @@ Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
 
 29.04.2015 Neu:
 
-- zusätzliche Vor- und Nachnahme-Dateien für Frankreich, Japn Männer & Frauen ( die häufigsten Namen )
+- zusätzliche Vor- und Nachnahme für Frankreich, Japan Männer & Frauen ( die häufigsten Namen )
 - Actionlogs: mit Datumsanzeige & Uhrzeit
 - Actionlogs: zusätzlicher Seite im Frontend für den Admin zur Anzeige aller verfügbaren Aktivitäten
 
