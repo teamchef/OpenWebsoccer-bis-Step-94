@@ -29,6 +29,12 @@ Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
 - Anpassung in der layout.twig wegen des Hinweis auf die Version
 - Anpassung der Datei websoccer/admin/config/version.txt auf Open Websoocer-Sim / TLC 1.0
 
+29.04.2015 Neu:
+
+- zusätzliche Vor- und Nachnahme-Dateien für Frankreich, Japn Männer & Frauen ( die häufigsten Namen )
+- Actionlogs: mit Datumsanzeige & Uhrzeit
+- Actionlogs: zusätzlicher Seite im Frontend für den Admin zur Anzeige aller verfügbaren Aktivitäten
+
 
 Das Verzeichnis kann nun auch als Update genutzt werden. Die gesetzte Konfiguration wird nun nicht mehr überschrieben, da die
 Datei config.inc.php nicht mehr mitgeliefert wird.
