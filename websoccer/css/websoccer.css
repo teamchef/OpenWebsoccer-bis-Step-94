@@ -311,3 +311,20 @@
 		max-height: 550px;
 	}
 }
+
+/* Footer am unteren Bildschirmrand für alle standardkonformen Browser */
+#footer {
+	position:fixed;
+	bottom:0px; left:0px; right:0px;
+	background-image: url(../img/schedioartskin/players-bg.png);
+	text-align:center;
+	padding:0px;
+	padding-top:30px;
+}
+
+/* Footer für den Internet Explorer mit Star HTML Hack */
+* html #footer  {
+	height:8%;
+	padding-top:3.5%;
+	background-image:url(../img/schedioartskin/players-bg.png);
+}
