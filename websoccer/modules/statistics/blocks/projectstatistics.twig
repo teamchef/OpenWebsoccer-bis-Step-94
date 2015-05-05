@@ -1,6 +1,9 @@
 {% extends "box.twig" %}
 
 {% block box_title %}
+
+<i class="icon-time"></i> {{ post.published_at|date(" m. d. Y - H:i", "Europe/Berlin") }} <br><br>
+
 {{ i18n.getMessage('projectstatistics_title') }}
 {% endblock %}
 
