@@ -13,20 +13,15 @@ Viele Optinonen und viele Einstellungsmöglichkeiten runden die Open Websoccer-Si
 ## Die TLC-Version beinhaltet zur Zeit folgende Änderungen bzw. Erweiterungen
 
 Die neue Core-Struktur bietet eine einfache Entwicklung. Änderungen an den Orginal-Dateien bzw. Erweiterungen mittels extend
-sind daher nicht mehr nötig und erhöhen damit die Stabilität. Legen Sie eine bearbeitete Kopie der Datei in die ürsprünglichen
+sind daher nicht mehr nötig und erhöhen damit die Stabilität. Legen Sie eine bearbeitete Kopie der Datei in die ursprünglichen
 Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
 
 - Die Null-Byte-Dateien wurden entfernt und in der lockfile.txt Versionsinformationen eingefügt
 - alle Dateien aus dem Verzeichniss classes wurden den Modulen im Ordner modules zugeordnet
-- die Datei global.inc.php wurde angepasst und ersetzt die original Datei
-- alle Dateein aus dem Verzeichnis templates/default wurden den Mmodulen im Ordner modules zugeordnet
-- die Datei TemplateEngine.class.php wurde angepasst und ersetzt ebenfalls die original Datei
+- alle Dateien aus dem Verzeichnis templates/default wurden den Mmodulen im Ordner modules zugeordnet
 - für die Zuordnung der Dateien zu den Modulen wurde eine Batch-Datei ersellt, siehe im Ordner websoccer-tools
 - die Installationsführung wurde angepasst, so das sich nun Fragen dazu erübrigen dürften
-- entsprechend wurde die Datei websoccer/install/index.php angepasst
 - alternative job.php im Hauptverzeichnis ( Parameter werden über die Konfiguration gesteuert )
-- Anpassung der modul.xml und der adminmessages_de.xml im Modul core für die alternative job.php
-- Anpassung in der layout.twig wegen des Hinweis auf die Version
 - Anpassung der Datei websoccer/admin/config/version.txt auf Open Websoocer-Sim / TLC 1.0
 
 29.04.2015 Neu:
@@ -36,6 +31,22 @@ Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
 - Actionlogs: zusätzlicher Seite im Frontend für den Admin zur Anzeige aller verfügbaren Aktivitäten
 - die urspünglichen Ordner bleiben für Eure eigenen Anpassungen & Test leer
 - Updates werden in den Core integriert und überschreiben somit nicht Eure Änderungen und Erweiterungen
+
+02.05.2015 Neu:
+
+- automatisches entblocken von Spielen (default) Der Admin muss nicht das geblockte Spiel von Hand frei geben.
+
+03.05.2015 Neu:
+
+- Frontend: Statistik & Refresh Die Userzählung wird sofort anstatt erst nach 15 Minuten korrigiert.
+
+04.05.2015 Neu:
+
+- Seite: "Heutige Spiele" jetzt mit Auto-Refresh Endlich kann man auf dieser Seite die Spiele Live verfolgen ohne klicken zu müssen.
+
+05.05.2015 Neu:
+
+- Footer: feste Position & Bild möglich Das der Footer bei wenig Content in der Bildmitte steht ist nun vorbei.
 
 
 Das Verzeichnis kann nun auch als Update genutzt werden. Die gesetzte Konfiguration wird nun nicht mehr überschrieben, da die
