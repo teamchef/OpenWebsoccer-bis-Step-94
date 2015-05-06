@@ -328,3 +328,20 @@
 	padding-top:3.5%;
 	background-image:url(../img/schedioartskin/players-bg.png);
 }
+
+.top_spoiler {
+padding: 60px;
+padding-top: 20px;
+padding-right: 60px;
+padding-bottom: 20px;
+padding-left: 60px;
+margin-bottom: 30px;
+font-size: 18px;
+font-weight: 200;
+line-height: 30px;
+color: inherit;
+background-color: #eeeeee;
+-webkit-border-radius: 6px;
+-moz-border-radius: 6px;
+border-radius: 6px;
+}

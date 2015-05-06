@@ -11,18 +11,18 @@
 
 {% if env.user.id == null %}
 
-<div class="hero-unit">
+<div class="top_spoiler">
   <h1>{{ block("browser_title") }}</h1>
   <p>{{ i18n.getMessage("home_teaser") }}</p>
-  
+
   	{% if env.getConfig("allow_userregistration") or env.getConfig("registration_url")|length > 0 %}
 		{% set registerUrl = env.getInternalUrl("register") %}
 		{% if env.getConfig("registration_url")|length > 0 %}
 			{% set registerUrl = env.getConfig("registration_url") %}
 		{% endif %}
 		<div style="text-align:center;"><a href="{{ registerUrl }}" class="btn btn-large">{{ i18n.getMessage("home_teaser_link_register") }}</a></div>
-	{% endif %} 
-  
+	{% endif %}
+
 </div>
 
 {% endif %}
