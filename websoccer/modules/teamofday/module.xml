@@ -11,9 +11,8 @@
             navitem="true"
             navweight="4"
             role="user,guest">
-            <css file="formation.css"/>
         </page>
 
     </pages>
-    
+
 </module>

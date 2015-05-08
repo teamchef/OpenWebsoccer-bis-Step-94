@@ -6,12 +6,12 @@
         <dependency module="office" version="1.0.0" />
         <dependency module="matches" version="1.0.0" />
     </dependencies>
-    
+
     <settings>
       <setting id="formation_max_next_matches" category="game" type="number" default="3" />
       <setting id="formation_max_templates" category="game" type="number" default="10" />
     </settings>
-    
+
     <pages>
         <page
             id="formation"
@@ -21,21 +21,20 @@
             navweight="0"
             role="user"
             parentItem="office">
-            
+
             <script file="jquery-ui-1.10.2.custom.min.js" debugonly="true"/>
             <script file="formationws4.js?v=5" debugonly="true"/>
             <script file="formation.min.js?v=5" productiononly="true"/>
-            
+
             <script file="bootstrap-slider.js" />
             <script file="bootstrap-switch.js" />
-            
+
             <css file="slider.css"/>
-        	<css file="formation.css"/>
         	<css file="bootstrap-switch.css"/>
         </page>
 
-    </pages> 
-    
+    </pages>
+
     <blocks>
 
         <block
@@ -46,7 +45,7 @@
             area="content_top"
             weight="0"
             role="user" />
-        
+
         <block
             id="formation_templates"
             template="formation_templates"
@@ -54,20 +53,20 @@
             includepages="none"
             area="custom"
             role="user" />
-        
+
     </blocks>
-    
+
   <actions>
 	<action id="save-formation" controller="SaveFormationController" role="user" log="true">
 	    <param id="id" type="number" required="true" />
-	    
+
 		<param id="offensive" type="number" required="true" min="1" max="100" />
 		<param id="setup" type="text" required="true" />
-		
+
 		<param id="longpasses" type="boolean" />
 		<param id="counterattacks" type="boolean" />
 		<param id="freekickplayer" type="number" />
-		
+
 		<param id="player1" type="number" required="true" />
 		<param id="player2" type="number" required="true" />
 		<param id="player3" type="number" required="true" />
@@ -95,31 +94,31 @@
 		<param id="player9_pos" type="text" required="true" />
 		<param id="player10_pos" type="text" required="true" />
 		<param id="player11_pos" type="text" required="true" />
-		
+
 		<param id="sub1_out" type="number" />
 		<param id="sub1_in" type="number" />
 		<param id="sub1_minute" type="number"/>
 		<param id="sub1_condition" type="text" />
 		<param id="sub1_position" type="text" />
-		
+
 		<param id="sub2_out" type="number" />
 		<param id="sub2_in" type="number" />
 		<param id="sub2_minute" type="number" />
 		<param id="sub2_condition" type="text" />
 		<param id="sub2_position" type="text" />
-		
+
 		<param id="sub3_out" type="number" />
 		<param id="sub3_in" type="number" />
 		<param id="sub3_minute" type="number" />
 		<param id="sub3_condition" type="text" />
 		<param id="sub3_position" type="text" />
-		
+
 		<param id="templatename" type="text" max="24" />
 	</action>
-	
+
 	<action id="remove-formation-template" controller="RemoveFormationTemplateController" role="user">
 	    <param id="templateid" type="number" required="true" />
 	</action>
   </actions>
-    
+
 </module>
