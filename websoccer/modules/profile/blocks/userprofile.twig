@@ -2,6 +2,16 @@
 
 {% import "macros/statisticelements.twig" as statisticelements %}
 
+{% block stylesheets %}
+	{{ parent() }}
+
+	<style type="text/css">
+		#notificationspopup {
+ 			width: 350px;
+		}
+	</style>
+{% endblock %}
+
 {% block box_title %}
 
 <i class="icon-time"></i>{{ post.published_at|date(" m. d. Y - H:i", "Europe/Berlin") }} <br><br>

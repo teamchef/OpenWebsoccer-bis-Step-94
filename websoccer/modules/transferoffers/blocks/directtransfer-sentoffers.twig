@@ -1,6 +1,19 @@
 {% import "macros/paginator.twig" as pagination %}
 {% import "macros/messagebox.twig" as messagebox %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	
+	<style type="text/css">
+	
+	.popover {
+		max-width: 500px;
+	}
+	
+	</style>
+	
+{% endblock %}
+
 {% if offers|length > 0 %}
 
 	<table class="table table-striped">
@@ -18,8 +31,8 @@
 			<tr>
 				<td><p>{{ env.getFormattedDatetime(offer.offer_submitted_date) }}</p>
 				{% if offer.offer_message|length > 0 %}
-				<a href="#" class="btn btn-mini wspopover" data-toggle="popover" 
-					data-title="{{ i18n.getMessage("transferoffers_offer_comment_title", offer.sender_user_name) }}" 
+				<a href="#" class="btn btn-mini wspopover" data-toggle="popover"
+					data-title="{{ i18n.getMessage("transferoffers_offer_comment_title", offer.sender_user_name) }}"
 					data-content="{{ offer.offer_message }}">{{ i18n.getMessage("transferoffers_offer_showcomment") }}</a>
 				{% endif %}
 				</td>
@@ -35,7 +48,7 @@
 							{% if offer.explayer1_id > 0  %}
 							<li><small>+ <a href="{{ env.getInternalUrl("player", "id=" ~ offer.explayer1_id) }}">{% if offer.explayer1_pseudonym|length > 0 %}{{ offer.explayer1_pseudonym }}{% else %}{{ offer.explayer1_firstname }} {{ offer.explayer1_lastname }}{% endif %}</a></small></li>
 							{% endif %}
-							
+
 							{% if offer.explayer2_id > 0  %}
 							<li><small>+ <a href="{{ env.getInternalUrl("player", "id=" ~ offer.explayer2_id) }}">{% if offer.explayer2_pseudonym|length > 0 %}{{ offer.explayer2_pseudonym }}{% else %}{{ offer.explayer2_firstname }} {{ offer.explayer2_lastname }}{% endif %}</a></small></li>
 							{% endif %}
@@ -49,15 +62,15 @@
 						data-ajaxquerystr="block=directtransfer-sentoffers&action=directtransfer-cancel&id={{ offer.offer_id }}">{{ i18n.getMessage("transferoffers_offer_cancellation_button") }}</a></p>
 					{% else %}
 						<span class="label label-important">{{ i18n.getMessage("transferoffers_offer_status_rejected") }}</span>
-						
+
 						{% if offer.offer_rejected_message|length > 0 %}
-						<a href="#" class="wspopover" data-toggle="popover" 
-							data-title="{{ i18n.getMessage("transferoffers_offer_comment_title", offer.receiver_user_name) }}" 
+						<a href="#" class="wspopover" data-toggle="popover"
+							data-title="{{ i18n.getMessage("transferoffers_offer_comment_title", offer.receiver_user_name) }}"
 							data-content="{{ offer.offer_rejected_message }}"
 							data-placement="left"
 							data-trigger="hover"><i class="icon-envelope"></i></a>
 						{% endif %}
-						
+
 					{% endif %}
 				</td>
 			</tr>
