@@ -1,11 +1,6 @@
 {% extends "base.twig" %}
 {% import "macros/messagebox.twig" as messagebox %}
 
-	{% block stylesheets %}
-		{{ parent() }}
-		{% include 'formation_css.twig' %}
-	{% endblock %}
-
 {% block page_title %}
 {{ i18n.getMessage("teamoftheday_navlabel") }}
 {% endblock %}

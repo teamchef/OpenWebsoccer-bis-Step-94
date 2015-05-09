@@ -3,11 +3,6 @@
 {% import "macros/formelements.twig" as formelements %}
 {% import "macros/statisticelements.twig" as statisticelements %}
 
-	{% block stylesheets %}
-	    {{ parent() }}
-		{% include 'formation_css.twig' %}
-	{% endblock %}
-
 {% block page_title %}
 {{ i18n.getMessage("formation_title") }}
 {% endblock %}

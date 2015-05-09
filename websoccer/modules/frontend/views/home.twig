@@ -2,11 +2,6 @@
 
 {% import "macros/messagebox.twig" as msgbox %}
 
-	{% block stylesheets %}
-	   {{ parent() }}
-	   {% include 'css.twig' %}
-	{% endblock %}
-
 {% block browser_title %}
 {{ i18n.getMessage("home_title", env.getConfig("projectname")) }}
 {% endblock %}
