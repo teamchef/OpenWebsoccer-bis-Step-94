@@ -1,5 +1,11 @@
 {% extends "views/formation_base.twig" %}
 
+			{% block stylesheets %}
+			   	{{ parent() }}
+			
+				{% include 'formation_css.twig' %}
+			{% endblock %}
+
 {% block formation_setup %}
 
 	<h4>{{ i18n.getMessage("entity_youthmatch") }}</h4>
