@@ -3,16 +3,6 @@
 {% import "macros/formelements.twig" as formelements %}
 {% import "macros/messagebox.twig" as msgbox %}
 
-{% block stylesheets %}
-	{{ parent() }}
-
-	<style type="text/css">
-		#stadium {
- 			background: url('./img/pitch_bg.png') no-repeat 110px 90px;
-		}
-	</style>
-{% endblock %}
-
 {% block page_title %}
 {{ i18n.getMessage("stadium_navlabel") }}
 {% endblock %}
