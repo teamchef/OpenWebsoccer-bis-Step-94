@@ -33,7 +33,7 @@
             model="ProfileBlockModel"
             includepages="all"
             excludepages="home"
-            area="sidebar"
+            area="custom"
             weight="0"
             role="user" />
 

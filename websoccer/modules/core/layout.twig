@@ -86,11 +86,24 @@
 
 					</div>
 				</div>
-				<div class="span4">
 
+				<div class="span4">
+					<div id="profile">
+						{% if blocks.sidebar is defined %}
+							<div class="ajaxLoadedBlock" id="userprofile" data-ajaxblock="userprofile" data-ignoreemptymessages="true" data-refreshperiod="30"></div>
+						{% endif %}
+					</div>
+		
 					{% if blocks.sidebar is defined %}
-						<div class="ajaxLoadedBlock" id="userprofile" data-ajaxblock="userprofile" data-ignoreemptymessages="true" data-refreshperiod="30"></div>
+						{% for uiBlock in blocks.sidebar %}
+						{% if not block('userprofile_block') %}
+							<div id="{{ uiBlock.id }}_block">
+							{{ viewHandler.renderBlock(uiBlock.id, uiBlock)|raw }}
+							</div>
+							{% endif %}
+						{% endfor %}
 					{% endif %}
+					
 				</div>
 			</div>
 			{% endblock %}
