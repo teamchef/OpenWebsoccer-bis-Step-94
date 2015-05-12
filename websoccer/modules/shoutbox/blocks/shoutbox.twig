@@ -1,26 +1,5 @@
 {% extends "box.twig" %}
 
-{% block stylesheets %}
-	{{ parent() }}
-
-	<style type="text/css">
-		.shoutboxmessages {
-			height: 250px;
-			overflow-y: scroll;
-			padding: 10px 5px;
-			margin-bottom: 5px;
-			background-color: #f9f9f9;
-			border: 1px solid #dde2e4;
-			-webkit-border-radius: 4px;
-			-moz-border-radius: 4px;
-			border-radius: 4px;
-			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-			-moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-		}
-	</style>
-{% endblock %}
-
 {% block box_title %}
 {{ i18n.getMessage('shoutbox_title') }}
 {% endblock %}
@@ -29,11 +8,17 @@
 <div id="shoutboxvalmessages"></div>
 
 <div style="text-align: right;">
-	<a href="#shrefresh" id="shrefresh" class="btn btn-mini ajaxLink"
-		data-ajaxtarget="shoutbox_block" data-ajaxblock="shoutbox" data-ajaxquerystr="id={{ env.getRequestParameter("id") }}"
-		style="margin-bottom: 5px;"><i class="icon-refresh"></i> {{ i18n.getMessage("button_refresh") }}</a>
+		<a id="matchReportRefresh" class="btn ajaxLink"
+			data-ajaxtarget="shoutbox_block" data-ajaxblock="shoutbox" data-messagetarget="shoutboxvalmessages"
+			data-ajaxquerystr="id={{ env.getRequestParameter("id") }}"
+			data-blockseconds="30"
+			href="#refresh"><span class="timerCount"></span></a>
 </div>
-<div class="shoutboxmessages">
+
+<div class="ajaxLoadedBlock">
+
+	[{{ env.getFormattedDatetime(message.date, i18n) }}]
+ 	<br><br>
 
 	{% for message in messages %}
 	<div>
@@ -43,23 +28,6 @@
 		<a href="{{ env.getInternalUrl("user", "id=" ~ message.user_id) }}">{{ message.user_name }}</a>: {{ message.message }}
 	</div>
 	{% endfor %}
-
 </div>
-{% if env.user.id and (hidesubmit is not defined or not hidesubmit) %}
-<form class="form form-inline" method="post">
-	<input type="hidden" name="action" value="send-shoutbox-msg"/>
-	<input type="hidden" name="block" value="shoutbox"/>
-	<input type="hidden" name="id" value="{{ env.getRequestParameter("id") }}"/>
-
-	<input class="span3" id="msgtext" name="msgtext" type="text" placeholder="{{ i18n.getMessage("shoutbox_messageinput_placeholder") }}" required="true"
-		value="{% if validationMsg["msgtext"] is defined %}{{ env.getRequestParameter("msgtext") }}{% endif %}">
-	<input type="submit" class="btn ajaxSubmit"
-		data-ajaxtarget="shoutbox_block" data-messagetarget="shoutboxvalmessages" value="{{ i18n.getMessage("shoutbox_button_go") }}"/>
-
-	{% if validationMsg["msgtext"] is defined %}<p class="text-error">{{ validationMsg["msgtext"] }}</p>{% endif %}
-</form>
-{% else %}
-	<p><small>{{ i18n.getMessage('shoutbox_hiddensubmit_note') }}</small></p>
-{% endif %}
 
 {% endblock %}
