@@ -2,22 +2,8 @@
 
 {% import "macros/statisticelements.twig" as statisticelements %}
 
-{% block stylesheets %}
-	{{ parent() }}
-
-	<style type="text/css">
-		#notificationspopup {
- 			width: 350px;
-		}
-	</style>
-{% endblock %}
-
 {% block box_title %}
-
-<i class="icon-time"></i>{{ post.published_at|date(" m. d. Y - H:i", "Europe/Berlin") }} <br><br>
-
 {{ i18n.getMessage('userprofile_block_title') }}
-
 {% endblock %}
 
 {% block box_content %}
@@ -42,9 +28,6 @@
 <p><em>{{ i18n.getMessage('userprofile_block_popularity') }}</em> <i class="icon-question-sign wstooltip" data-toggle="tooltip" title="{{ i18n.getMessage('userprofile_block_tooltip_popularity') }}"></i></p>
 {{ statisticelements.progressbar(profile.user_popularity) }}
 
-<p><em>{{ i18n.getMessage('userprofile_block_highscore') }}</em><br/>
-<a href="{{ env.getInternalUrl("highscore") }}">{{ profile.user_highscore|number_format(0, ',', ' ') }}</a></p>
-
 {% if env.getUser().clubId > 0 %}
 <p><em>{{ i18n.getMessage('entity_club') }}</em>
 {% if userteam.team_picture|length %}
@@ -58,20 +41,49 @@
 
 <div class="dropdown" style="margin-top: -11px; margin-bottom: 12px;">
   {{ teamPicture|raw }} <a class="dropdown-toggle ajaxLink" data-toggle="dropdown" href="#" data-ajaxblock="user-clubs-selection" data-ajaxtarget="clubsSelectionList">
-    {{ userteam.team_name }}
+  {{ userteam.team_name }} (<a href="{{ env.getInternalUrl("myteam") }}"> {{ teamsize }} Spieler im Kader</a> )
     <b class="caret"></b>
   </a>
   <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" style="margin: 0 5px"><i class="icon-info-sign darkIcon"></i></a>
-  <a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i></a>
+  <a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i></a> Platz {{ tableRank }}
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="clubsSelectionList">
 
   </ul>
 </div>
 {% else %}
 	<br>
-	{{ teamPicture|raw }} <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}">{{ userteam.team_name }}</a>
-	<a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i></a>
+	{{ teamPicture|raw }} <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}">{{ userteam.team_name }}</a><br><p>
+	<a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" ><i class="icon-info-sign darkIcon"></i> Vereinsproviel </a> 
+	<a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i> Tabelle </a>
 	</p>
+{% endif %}
+
+{% if nextMatch.match_date is defined %}
+	{% if nextMatch.match_home_id == userteam.team_id and nextMatch.match_home_formation_id %}
+		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
+	{% elseif nextMatch.match_guest_id == userteam.team_id and nextMatch.match_guest_formation_id %}
+		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
+	{% else %}
+		<i class="icon-minus-sign-alt wstooltip" title="{{ i18n.getMessage("formation_notsubmitted_tooltip") }}"></i>
+	{% endif %}
+	Aufstellungsabgabe:
+	<p><em>{{ env.getFormattedDatetime(nextMatch.match_date) }} | {{ i18n.getMessage("matchtype_" ~ nextMatch.match_type) }}</em><p>
+	<strong><a href="{{ env.getInternalUrl("team", "id=" ~ nextMatch.match_home_id) }}">{{ nextMatch.match_home_name }}</a>	-
+	<a href="{{ env.getInternalUrl("team", "id=" ~ nextMatch.match_guest_id) }}">{{ nextMatch.match_guest_name }}</a></strong></p>
+{% endif %}
+
+{% if nationalMatch.match_date is defined %}
+	{% if nationalMatch.match_home_id == nationalteam and nationalMatch.match_home_formation_id %}
+		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
+	{% elseif nationalMatch.match_guest_id == nationalteam and nationalMatch.match_guest_formation_id %}
+		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
+	{% else %} 
+		<i class="icon-minus-sign-alt wstooltip" title="{{ i18n.getMessage("formation_notsubmitted_tooltip") }}"></i>
+	{% endif %}
+	Nationalteamaufstellung:
+	<p><em>{{ env.getFormattedDatetime(nationalMatch.match_date) }} | {{ i18n.getMessage("matchtype_" ~ nationalMatch.match_type) }}</em><p>
+	<strong><a href="{{ env.getInternalUrl("team", "id=" ~ nationalMatch.match_home_id) }}">{{ nationalMatch.match_home_name }}</a>	-
+	<a href="{{ env.getInternalUrl("team", "id=" ~ nationalMatch.match_guest_id) }}">{{ nationalMatch.match_guest_name }}</a></strong></p>
 {% endif %}
 
 <p><em>{{ i18n.getMessage('entity_club_finanz_budget') }}</em><br/>
