@@ -56,10 +56,10 @@ class ProfileBlockModel implements IModel {
 		if ($clubId > 0) {
 			$team = TeamsDataService::getTeamSummaryById($this->_websoccer, $this->_db, $clubId);
 		}
-		
+
 		$this->_teamId = NationalteamsDataService::getNationalTeamManagedByCurrentUser($this->_websoccer, $this->_db);
 		if ($this->_teamId) {
-    		$nationalMatch = MatchesDataService::getNextMatch($this->_websoccer, $this->_db, $this->_teamId); 
+    		$nationalMatch = MatchesDataService::getNextMatch($this->_websoccer, $this->_db, $this->_teamId);
 		}
 
 		// team size
@@ -74,7 +74,7 @@ class ProfileBlockModel implements IModel {
 		$unseenNotifications = NotificationsDataService::countUnseenNotifications($this->_websoccer, $this->_db, $user->id, $clubId);
 		$nextMatch = MatchesDataService::getNextMatch($this->_websoccer, $this->_db, $clubId);
 
-		return array("profile" => $userinfo, "userteam" => $team, "unseenMessages" => $unseenMessages,"unseenNotifications" => $unseenNotifications,
+		return array("tableRank" => $teamRank, "profile" => $userinfo, "userteam" => $team, "unseenMessages" => $unseenMessages,"unseenNotifications" => $unseenNotifications,
 					 "nextMatch" => $nextMatch, 'nationalMatch' => $nationalMatch, 'nationalteam' => $this->_teamId);}
 }
 

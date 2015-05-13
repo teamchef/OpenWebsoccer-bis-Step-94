@@ -45,7 +45,7 @@
     <b class="caret"></b>
   </a>
   <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" style="margin: 0 5px"><i class="icon-info-sign darkIcon"></i></a>
-  <a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i></a> Platz {{ tableRank }}
+  <a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i></a>  Tabelle </a>{{ tableRank }}. Platz
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="clubsSelectionList">
 
   </ul>
@@ -53,8 +53,8 @@
 {% else %}
 	<br>
 	{{ teamPicture|raw }} <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}">{{ userteam.team_name }}</a><br><p>
-	<a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" ><i class="icon-info-sign darkIcon"></i> Vereinsproviel </a> 
-	<a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i> Tabelle </a>
+	<a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" ><i class="icon-info-sign darkIcon"></i> Vereinsprofil </a>
+	<a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i> Tabelle </a>{{ tableRank }}. Platz 
 	</p>
 {% endif %}
 
@@ -77,10 +77,10 @@
 		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
 	{% elseif nationalMatch.match_guest_id == nationalteam and nationalMatch.match_guest_formation_id %}
 		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
-	{% else %} 
+	{% else %}
 		<i class="icon-minus-sign-alt wstooltip" title="{{ i18n.getMessage("formation_notsubmitted_tooltip") }}"></i>
 	{% endif %}
-	Nationalteamaufstellung:
+	Nationalteam-Aufstellungsabgabe:
 	<p><em>{{ env.getFormattedDatetime(nationalMatch.match_date) }} | {{ i18n.getMessage("matchtype_" ~ nationalMatch.match_type) }}</em><p>
 	<strong><a href="{{ env.getInternalUrl("team", "id=" ~ nationalMatch.match_home_id) }}">{{ nationalMatch.match_home_name }}</a>	-
 	<a href="{{ env.getInternalUrl("team", "id=" ~ nationalMatch.match_guest_id) }}">{{ nationalMatch.match_guest_name }}</a></strong></p>
