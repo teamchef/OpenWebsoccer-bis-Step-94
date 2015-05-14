@@ -20,30 +20,25 @@
 
 ******************************************************/
 
-class AlltimeTableModel implements IModel {
+class LeagueDetailsModel implements IModel {
 
 	public function __construct($db, $i18n, $websoccer) {
 		$this->_db = $db;
 		$this->_i18n = $i18n;
 		$this->_websoccer = $websoccer;
-
-		$this->_leagueId = (int) $this->_websoccer->getRequestParameter("id");
-		$this->_type = $this->_websoccer->getRequestParameter("type");
-
-		$clubId = $this->_websoccer->getUser()->getClubId($this->_websoccer, $this->_db);
-
-		include 'set_league.php';
 	}
 
-	public function renderView() {
-
-		return ($this->_leagueId  > 0);
-	}
+	public function renderView() { return TRUE; }
 
 	public function getTemplateParameters() {
-		$teams = TeamsDataService::getTeamsOfLeagueOrderedByAlltimeTableCriteria($this->_websoccer, $this->_db, $this->_leagueId, $this->_type);
 
-		return array("leagueId" => $this->_leagueId, "teams" => $teams);
+		$league = null;
+
+		$leagueId = (int) $this->_websoccer->getRequestParameter("id");
+
+		include 'set_league.php';
+
+		return array("league" => $league, "leagues" => LeagueDataService::getLeaguesSortedByCountry($this->_websoccer, $this->_db));
 	}
 }
 

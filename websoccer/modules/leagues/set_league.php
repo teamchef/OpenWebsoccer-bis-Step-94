@@ -20,31 +20,16 @@
 
 ******************************************************/
 
-class AlltimeTableModel implements IModel {
+// Start: Auswahl der Liga - wird in zwei Dateien genutzt
 
-	public function __construct($db, $i18n, $websoccer) {
-		$this->_db = $db;
-		$this->_i18n = $i18n;
-		$this->_websoccer = $websoccer;
+if ($this->_leagueId == 0 && $clubId > 0) {
+	$result = $db->querySelect("liga_id", $this->_websoccer->getConfig("db_prefix") . "_verein",
+		"id = %d", $clubId, 1);
+	  $club = $result->fetch_array();
+	$result->free();
 
-		$this->_leagueId = (int) $this->_websoccer->getRequestParameter("id");
-		$this->_type = $this->_websoccer->getRequestParameter("type");
-
-		$clubId = $this->_websoccer->getUser()->getClubId($this->_websoccer, $this->_db);
-
-		include 'set_league.php';
-	}
-
-	public function renderView() {
-
-		return ($this->_leagueId  > 0);
-	}
-
-	public function getTemplateParameters() {
-		$teams = TeamsDataService::getTeamsOfLeagueOrderedByAlltimeTableCriteria($this->_websoccer, $this->_db, $this->_leagueId, $this->_type);
-
-		return array("leagueId" => $this->_leagueId, "teams" => $teams);
-	}
+	$this->_leagueId = $club["liga_id"];
 }
 
+// End: Auswahl der Liga by Rolf Joseph / ErdemCan
 ?>
