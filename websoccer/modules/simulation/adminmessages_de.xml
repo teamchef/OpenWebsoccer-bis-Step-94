@@ -115,6 +115,4 @@
 	<message id="settings_label_sim_createformation_strength_help">in Prozent; Weniger als 100% bedeutet eine Schwächung von Spielern, die vom System aufgestellt werden.</message>
 
 	<message id="settings_label_sim_playerupdate_through_nationalteam">Spieler verändern auch in Nationalmannschaftsspielen Frische, Kondition und Zufriedenheit.</message>
-
-	<message id="settings_label_sim_auto_deblock">Automatisches entblocken von Spielen die durch das System durch einen Fehler vorsichtshalber geblockt wurden. Ein manuelles entblocken durch den Admin entfällt.</message>
 </messages>

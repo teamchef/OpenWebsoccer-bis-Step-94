@@ -55,7 +55,5 @@
       <setting id="sim_strategy" category="simulation_expert" type="text" default="DefaultSimulationStrategy" />
       <setting id="sim_simulation_observers" category="simulation_expert" type="tags" default="MatchReportSimulationObserver" />
       <setting id="sim_simulator_observers" category="simulation_expert" type="tags" default="MatchReportSimulatorObserver,DataUpdateSimulatorObserver" />
-
-      <setting id="sim_auto_deblock" category="simulation" type="boolean" default="1" />
   </settings>
 </module>

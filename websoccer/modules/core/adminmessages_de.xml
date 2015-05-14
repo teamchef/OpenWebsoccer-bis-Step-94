@@ -130,14 +130,6 @@
 	<message id="settings_tab_game">Spiel</message>
 	<message id="settings_tab_social">Soziale Netzwerke</message>
 
-	<message id="settings_tab_jobs">Jobs</message>
-	<message id="settings_label_addplyr">Vereinslose Spieler auf die Transferliste setzen</message>
-	<message id="settings_label_extransf">Offene Spielertransfers ausführen</message>
-	<message id="settings_label_sim">Offene Spiele simulieren</message>
-	<message id="settings_label_usractv">Benutzerinaktivität berechnen und aktualisieren</message>
-	<message id="settings_label_stats">Ligastatistiken berechnen und aktualisieren</message>
-	<message id="settings_label_stadium">Fällige Stadionerweiterungen und Trainingslager ausführen</message>
-
 	<message id="settings_label_context_root">Relativer Pfad auf Server (Context Root)</message>
 	<message id="settings_label_context_root_help">Ohne "/" am Ende.</message>
 	<message id="settings_label_projectname">Projektname</message>
