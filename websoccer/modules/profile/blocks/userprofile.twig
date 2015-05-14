@@ -42,10 +42,10 @@
 <div class="dropdown" style="margin-top: -11px; margin-bottom: 12px;">
   {{ teamPicture|raw }} <a class="dropdown-toggle ajaxLink" data-toggle="dropdown" href="#" data-ajaxblock="user-clubs-selection" data-ajaxtarget="clubsSelectionList">
   {{ userteam.team_name }} (<a href="{{ env.getInternalUrl("myteam") }}"> {{ teamsize }} Spieler im Kader</a> )
-    <b class="caret"></b>
+    <b class="caret"></b><br>
   </a>
-  <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" style="margin: 0 5px"><i class="icon-info-sign darkIcon"></i></a>
-  <a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i></a>  Tabelle </a>{{ tableRank }}. Platz
+  <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}"><i class="icon-info-sign darkIcon"></i> Vereinsprofil </a>
+  <a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i> Tabelle </a>{{ tableRank }}. Platz
   <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel" id="clubsSelectionList">
 
   </ul>
@@ -53,8 +53,8 @@
 {% else %}
 	<br>
 	{{ teamPicture|raw }} <a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}">{{ userteam.team_name }}</a><br><p>
-	<a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}" ><i class="icon-info-sign darkIcon"></i> Vereinsprofil </a>
-	<a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i> Tabelle </a>{{ tableRank }}. Platz 
+	<a href="{{ env.getInternalUrl("team", "id=" ~ userteam.team_id) }}" title="{{ i18n.getMessage("team_navlabel") }}"><i class="icon-info-sign darkIcon"></i> Vereinsprofil </a>
+	<a href="{{ env.getInternalUrl("league", "id=" ~ userteam.team_league_id) }}" title="{{ i18n.getMessage("userprofile_block_link_table") }}"><i class="icon-table darkIcon"></i> Tabelle </a>{{ tableRank }}. Platz
 	</p>
 {% endif %}
 

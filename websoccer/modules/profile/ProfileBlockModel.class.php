@@ -75,7 +75,7 @@ class ProfileBlockModel implements IModel {
 		$nextMatch = MatchesDataService::getNextMatch($this->_websoccer, $this->_db, $clubId);
 
 		return array("tableRank" => $teamRank, "profile" => $userinfo, "userteam" => $team, "unseenMessages" => $unseenMessages,"unseenNotifications" => $unseenNotifications,
-					 "nextMatch" => $nextMatch, 'nationalMatch' => $nationalMatch, 'nationalteam' => $this->_teamId);}
+					  "teamsize" => $teamsize, "nextMatch" => $nextMatch, 'nationalMatch' => $nationalMatch, 'nationalteam' => $this->_teamId);}
 }
 
 ?>
