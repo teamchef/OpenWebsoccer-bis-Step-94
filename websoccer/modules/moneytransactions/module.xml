@@ -28,13 +28,16 @@
                         id="entity_transaction_absender"
                         field="TransactionTab.absender"
                         converter="PaymentSenderMessageConverter"
-                        type="text" />
+                        type="text"
+                        sort="true"
+                        filter="true" />
                     
                     <column
                         id="entity_transaction_betrag"
                         field="TransactionTab.betrag"
                         type="number"
-                        sort="true" />
+                        sort="true" 
+                        filter="true" />
 
                     <column
                         id="entity_transaction_datum"
@@ -42,12 +45,21 @@
                         type="timestamp"
                         sort="true"
                         filter="true" />
+
+                    <column
+                        id="entity_transaction_timestamp"
+                        field="TransactionTab.datum"
+                        type="text"
+                        sort="true"
+                        filter="true" />
                     
                     <column
                         id="entity_transaction_verwendung"
                         field="TransactionTab.verwendung"
                         type="text"
-                        converter="PaymentSubjectMessageConverter" />
+                        converter="PaymentSubjectMessageConverter" 
+                        sort="true"
+                        filter="true"/>
                     
                 	<join type="LEFT" jointable="verein AS ClubTab" joincondition="TransactionTab.verein_id = ClubTab.id" />
                 </overview>
