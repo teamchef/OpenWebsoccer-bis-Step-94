@@ -2,12 +2,12 @@
 
 {% block box_title %}
 
-<i class="icon-time"></i> {{ post.published_at|date(" m. d. Y - H:i", "Europe/Berlin") }} <br><br>
-
 {{ i18n.getMessage('projectstatistics_title') }}
 {% endblock %}
 
 {% block box_content %}
+
+<i class="icon-time"></i> {{ post.published_at|date(" m. d. Y - H:i", "Europe/Berlin") }} <br><br>
 
 <p><a href="{{ env.getInternalUrl("who-is-online") }}" title="{{ i18n.getMessage("who-is-online_navlabel") }}">{% if usersOnline == 1 %}{{ i18n.getMessage("projectstatistics_onlineusers_single")|raw }}{% else %}{{ i18n.getMessage("projectstatistics_onlineusers", usersOnline)|raw }}{% endif %}.</a> <br> {{ i18n.getMessage("projectstatistics_totalusers", usersTotal)|raw }}.</p>
 
