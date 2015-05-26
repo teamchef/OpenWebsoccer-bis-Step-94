@@ -51,7 +51,6 @@ class DefaultBootstrapSkin implements ISkin {
 		$files[] = '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css';
 
 		$dir = $this->_websoccer->getConfig('context_root') . '/css/';
-		$files[] = $dir . 'defaultskin.css';
 		$files[] = $dir . 'bootstrap-responsive.min.css';
 
 		return $files;
