@@ -3,4 +3,4 @@
 Es handelt sich um die Dokumentation des Original Inizial-Realease des Open Websoccers.
 Sie kann hier abgerufen werden, da auf Github sonst die Datei mit einbezogen wird:
 
-http://web141.webclient7.de/Portal/files/open-websoccer-5.5.2%20Dokumentation.zip
+http://topligclub.de/open-websoccer-5.5.2%20Dokumentation.zip
