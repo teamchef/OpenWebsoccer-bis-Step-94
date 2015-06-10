@@ -2,16 +2,15 @@
 {% import "macros/messagebox.twig" as messagebox %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	
+
 	<style type="text/css">
-	
+
 	.popover {
 		max-width: 500px;
 	}
-	
+
 	</style>
-	
+
 {% endblock %}
 
 {% if offers|length > 0 %}
