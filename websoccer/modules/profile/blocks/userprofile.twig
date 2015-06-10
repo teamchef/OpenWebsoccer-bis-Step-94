@@ -8,7 +8,7 @@
 
 {% block box_content %}
 
-<i class="icon-time"></i> {{ post.published_at|date(" d. m. Y - H:i", "Europe/Berlin") }} <br><br>
+<i class="icon-time"></i> {{ "now"|date(" d. m. Y - H:i", "Europe/Berlin") }} <br><br>
 
 {% if env.user.profilepicture|length > 0 %}
 	<a href="{{ env.getInternalUrl("user", "id=" ~ env.user.id) }}">
