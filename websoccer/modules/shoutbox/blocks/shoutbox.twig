@@ -17,7 +17,7 @@
 
 <div class="ajaxLoadedBlock">
 
-	[{{ env.getFormattedDatetime(message.date, i18n) }}]
+	[Heute, {{ "now"|date("H:i", "Europe/Berlin") }}]
  	<br><br>
 
 	{% for message in messages %}
