@@ -51,23 +51,10 @@ define("JOBS_CONFIG_FILE", BASE_FOLDER . "/admin/config/jobs.xml");
 // Sicherheitsschlüssel aus der global.inc.php und aus dem URL-Parameter werden vergllichen und ggf. abgebrochen
 if ($website->getConfig("webjobexecution_key") !== $_REQUEST["sectoken"]) { die(); }
 
-// Start - Fallback bei defekter job.xml
-// Standard = gesetzt
-// Die Größe der File-Abfragen bei Bedarf eentsprechend ändern !
-
-$set = (int) $websoccer->getConfig('job_xml_fallback');
-
-if ( $set == '1' ) {
-   // Überprüfung eines zu großen Files
-   if ( filesize( BASE_FOLDER . "/admin/config/jobs.xml") <= 1000 ) {
-	  copy(BASE_FOLDER . "/admin/config/Kopie_jobs.xml", BASE_FOLDER . "/admin/config/jobs.xml");
-      }
-   // Überprüfung eines zu keinen Files
-   if ( filesize( BASE_FOLDER . "/admin/config/jobs.xml") >= 1447 ) {
-	  copy(BASE_FOLDER . "/admin/config/Kopie_jobs.xml", BASE_FOLDER . "/admin/config/jobs.xml");
-      }
-   }
-// End - Fallback bei defekter job.xml
+// die Größe der jobs.xml abfragen und wenn zu klein ...
+if ( filesize( BASE_FOLDER . "/admin/config/jobs.xml") <= 1000 ) {
+	// ... das Backup der jobs.xml als neue jobs.xml speichern
+	copy(BASE_FOLDER . "/admin/config/jobs_backup.xml", BASE_FOLDER . "/admin/config/jobs.xml"); }
 
 // Sprachunterstützung wird in eine Object-Variable geladen
 $i18n     = I18n::getInstance($website->getConfig("supported_languages"));
@@ -82,4 +69,5 @@ $job      = new $jobClass($website, $db, $i18n, $_REQUEST["jobid"]);
 $job->execute();
 
 ?>
+
 
