@@ -3,8 +3,10 @@
 <messages>
 	<message id="settings_tab_tlc">TLC - Features</message>
 
-	<message id="settings_label_sim_auto_deblock">Automatisches entblocken von Spielen die durch das System durch einen Fehler vorsichtshalber geblockt wurden. Ein manuelles entblocken durch den Admin entfällt.</message>
+	<message id="settings_label_sim_auto_deblock">Automatisches entblocken von Spielen: Der Admin muss die, nach Berechnungsfehlern vorsichtshalber geblockten Spiele, nicht mehr selbst entblocken.</message>
 
+	<message id="settings_label_jobxmlsetlow">job.xml min.</message>
+	<message id="settings_label_jobxmlsethigh">job.xml max.</message>
 	<message id="settings_label_addplyr">Vereinslose Spieler auf die Transferliste setzen</message>
 	<message id="settings_label_extransf">Offene Spielertransfers ausführen</message>
 	<message id="settings_label_sim">Offene Spiele simulieren</message>
