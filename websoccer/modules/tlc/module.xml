@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE module SYSTEM "../module.dtd">
 <module version="2.0.0">
+
+	<admin>
+		<adminpage id="phpjobscheduler" permissionrole="r_admin" navcategory="settings" filename="phpjobscheduler"/>
+	</admin>
+
 	<settings>
   		<setting id="sim_auto_deblock" category="tlc" type="boolean" default="1" />
-  		
+
       	<setting id="jobxmlsetlow" category="tlc" type="number" default="1385" />
       	<setting id="jobxmlsethigh" category="tlc" type="number" default="1447" />
-      	      	
+
       	<setting id="addplyr" category="tlc" type="text" default="AddPlayerWithoutTeamToTransfermarketJob" />
       	<setting id="extransf" category="tlc" type="text" default="ExecuteTransfersJob" />
       	<setting id="sim" category="tlc" type="text" default="SimulateMatchesJob" />

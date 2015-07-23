@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE messages SYSTEM "../messages.dtd">
 <messages>
+	<message id="phpjobscheduler_navlabel">TLC Jobscheduler</message>
+
 	<message id="settings_tab_tlc">TLC - Features</message>
 
 	<message id="settings_label_sim_auto_deblock">Automatisches entblocken von Spielen: Der Admin muss die, nach Berechnungsfehlern vorsichtshalber geblockten Spiele, nicht mehr selbst entblocken.</message>
+
+	<message id="settings_label_transferoffersbetweenownteams_enabled">Direkttransfers auch zwischen den eigenen Teams erlauben.</message>
 
 	<message id="settings_label_jobxmlsetlow">job.xml min.</message>
 	<message id="settings_label_jobxmlsethigh">job.xml max.</message>
