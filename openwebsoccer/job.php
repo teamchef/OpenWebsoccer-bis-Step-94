@@ -51,14 +51,14 @@ define("JOBS_CONFIG_FILE", BASE_FOLDER . "/admin/config/jobs.xml");
 // Sicherheitsschlüssel aus der global.inc.php und aus dem URL-Parameter werden vergllichen und ggf. abgebrochen
 if ($website->getConfig("webjobexecution_key") !== $_REQUEST["sectoken"]) { die(); }
 
-// die Größe der jobs.xml abfragen und wenn zu klein ...
-if ( filesize( BASE_FOLDER . "/admin/config/jobs.xml") <= $website->getConfig("jobxmlsetlow")) {
-	// ... das Backup der jobs.xml als neue jobs.xml speichern
-	copy(BASE_FOLDER . "/admin/config/jobs_backup.xml", BASE_FOLDER . "/admin/config/jobs.xml"); }
+// kann die jobs.xml geladen werden, wenn nein, dann mit der Kopie ersetzen
+$doc = new DOMDocument();
+$loaded = @$doc->load(JOBS_CONFIG_FILE);
+if (!$loaded) {
+	copy(BASE_FOLDER . "/admin/config/jobs.xml", BASE_FOLDER . "/admin/config/error_jobs.xml");
 
-// Überprüfung eines zu großen Files
-if ( filesize( BASE_FOLDER . "/admin/config/jobs.xml") >= $website->getConfig("jobxmlsethigh")) {
-	copy(BASE_FOLDER . "/admin/config/Kopie_jobs.xml", BASE_FOLDER . "/admin/config/jobs.xml"); }
+	copy(BASE_FOLDER . "/admin/config/jobs_backup.xml", BASE_FOLDER . "/admin/config/jobs.xml");
+}
 
 // Sprachunterstützung wird in eine Object-Variable geladen
 $i18n     = I18n::getInstance($website->getConfig("supported_languages"));

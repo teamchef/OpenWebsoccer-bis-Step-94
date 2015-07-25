@@ -9,8 +9,6 @@
 
 	<message id="settings_label_transferoffersbetweenownteams_enabled">Direkttransfers auch zwischen den eigenen Teams erlauben.</message>
 
-	<message id="settings_label_jobxmlsetlow">job.xml min.</message>
-	<message id="settings_label_jobxmlsethigh">job.xml max.</message>
 	<message id="settings_label_addplyr">Vereinslose Spieler auf die Transferliste setzen</message>
 	<message id="settings_label_extransf">Offene Spielertransfers ausführen</message>
 	<message id="settings_label_sim">Offene Spiele simulieren</message>
