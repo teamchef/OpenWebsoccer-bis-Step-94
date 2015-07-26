@@ -32,8 +32,7 @@
             template="userprofile"
             model="ProfileBlockModel"
             includepages="all"
-            excludepages="home"
-            area="custom"
+            area="sidebar"
             weight="0"
             role="user" />
 
