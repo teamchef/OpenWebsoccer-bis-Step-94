@@ -5,7 +5,7 @@
     <dependencies>
         <dependency module="clubs" version="1.0.0"/>
     </dependencies>
-    
+
     <admin>
         <adminpage
             id="player"
@@ -23,14 +23,14 @@
                         type="text"
                         sort="true"
                         filter="true" />
-                    
+
                     <column
                         id="entity_player_vorname"
                         field="PlayerTab.vorname"
                         type="text"
                         sort="true"
                         filter="true" />
-                    
+
                     <column
                         id="entity_player_kunstname"
                         field="PlayerTab.kunstname"
@@ -44,37 +44,37 @@
                         type="text"
                         sort="true"
                         filter="true" />
-                    
+
                     <column
                         id="entity_player_position"
                         field="PlayerTab.position"
                         type="text"
                         sort="true" />
-                    
+
                      <column
                         id="entity_player_position_main"
                         field="PlayerTab.position_main"
                         type="text"
                         sort="true" />
-                     
+
                      <column
                         id="entity_player_position_second"
                         field="PlayerTab.position_second"
                         type="text"
                         sort="true" />
-                     
+
                      <column
                         id="entity_player_lending_owner_id"
                         field="LenderTab.name"
                         type="text"
                         sort="true"
                         filter="true" />
-                    
+
                     <column
                         id="entity_player_status"
                         field="PlayerTab.status"
                         type="boolean" />
-                    
+
                 	<join type="LEFT" jointable="verein AS ClubTab" joincondition="PlayerTab.verein_id = ClubTab.id" />
                 	<join type="LEFT" jointable="verein AS LenderTab" joincondition="PlayerTab.lending_owner_id = LenderTab.id" />
                 </overview>
@@ -90,62 +90,62 @@
 					<field id="position_main" type="select" selection="T,LV,IV,RV,LM,ZM,DM,OM,RM,LS,MS,RS" required="false"  />
 					<field id="position_second" type="select" selection="T,LV,IV,RV,LM,ZM,DM,OM,RM,LS,MS,RS" required="false"  />
 					<field id="nation" type="text" required="true"  />
-					
+
 					<field id="picture" type="file"  />
 					<field id="verletzt" type="number" default="0" />
 					<field id="gesperrt" type="number" default="0"  />
 					<field id="gesperrt_cups" type="number" default="0"  />
 					<field id="gesperrt_nationalteam" type="number" default="0"  />
-					
+
 					<field id="w_staerke" type="percent" required="true" roles="r_staerken" />
 					<field id="w_technik" type="percent" required="true" roles="r_staerken" />
 					<field id="w_kondition" type="percent" required="true" roles="r_staerken" />
 					<field id="w_frische" type="percent" required="true" roles="r_staerken" />
 					<field id="w_zufriedenheit" type="percent" required="true" roles="r_staerken" />
-					
+
 					<field id="transfermarkt" type="boolean" />
 					<field id="transfer_start" type="timestamp" />
 					<field id="transfer_ende" type="timestamp" />
 					<field id="transfer_mindestgebot" type="number" />
-					
+
 					<field id="vertrag_gehalt" type="number" />
 					<field id="vertrag_spiele" type="number" />
 					<field id="vertrag_torpraemie" type="number" />
-					
+
 					<field id="lending_owner_id" type="foreign_key" entity="club" jointable="verein" labelcolumns="name" />
 					<field id="lending_fee" type="number" />
 					<field id="lending_matches" type="number" />
-					
+
 					<field id="marktwert" type="number" />
-					
+
 					<field id="sa_tore" type="number" />
 					<field id="sa_assists" type="number" />
 					<field id="sa_spiele" type="number" />
 					<field id="sa_karten_gelb" type="number" />
 					<field id="sa_karten_gelb_rot" type="number" />
 					<field id="sa_karten_rot" type="number" />
-					
+
 					<field id="st_tore" type="number" />
 					<field id="st_assists" type="number" />
 					<field id="st_spiele" type="number" />
 					<field id="st_karten_gelb" type="number" />
 					<field id="st_karten_gelb_rot" type="number" />
 					<field id="st_karten_rot" type="number" />
-					
+
 					<field id="history" type="textarea" />
-					
+
 					<field id="unsellable" type="boolean" />
 					<field id="status" type="boolean" default="1" />
                 </editform>
             </entity>
         </adminpage>
     </admin>
-    
+
   <settings>
       <setting id="hide_strength_attributes" category="game" type="boolean" default="0" />
       <setting id="players_aging" category="game" type="select" selection="birthday,static" default="birthday" />
   </settings>
-  
+
     <pages>
         <page
             id="player"
@@ -156,7 +156,7 @@
             <script file="flot/jquery.flot.min.js" />
             <script file="charts.js" />
         </page>
-        
+
         <page
             id="topstrikers"
             template="strikers"
@@ -165,7 +165,7 @@
             navitem="true"
             navweight="3"
             parentItem="leagues" />
-        
+
         <page
             id="topscorers"
             template="scorers"
@@ -174,9 +174,18 @@
             navitem="true"
             navweight="4"
             parentItem="leagues" />
+            
+		<page
+            id="topassist"
+            template="assist"
+            model="TopAssistModel"
+            role="user,guest"
+            navitem="true"
+            navweight="5"
+            parentItem="leagues" />
 
-    </pages> 
-    
+    </pages>
+
     <blocks>
 
         <block
@@ -186,7 +195,7 @@
             includepages="none"
             area="custom"
             role="user,guest" />
-        
+
     </blocks>
-    
+
 </module>
