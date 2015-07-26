@@ -91,10 +91,10 @@ class DataGeneratorService {
 	 * @param array $strengths assoc. array of strength values. Keys are: strength, technique, stamina, freshness, satisfaction
 	 * @param array $positions assoc array of positions and number of players to generate for each position. Key=abbreviated positions as in DB.
 	 * @param int $maxDeviation maximum deviation in strength.
-	 * @param sring|NULL $nationality optional. Nationality of player.If not provided, it is taken from club.
+	 * @param string|NULL $nationality optional. Nationality of player.If not provided, it is taken from club.
 	 * @throws Exception if generation failed.
 	 */
-	public static function generatePlayers(WebSoccer $websoccer, DbConnection $db, $teamId, $age, $ageDeviation, $salary, $contractDuration, $strengths, $positions, $maxDeviation, $nationality = NULL) {
+	public static function generatePlayers(WebSoccer $websoccer, DbConnection $db, $teamId, $age, $ageDeviation, $salary, $contractDuration, $strengths, $positions, $maxDeviation, $percForeigners = 0, $nationality = NULL) {
 		
 		if (strlen($nationality)) {
 			$country = $nationality;
@@ -112,7 +112,6 @@ class DataGeneratorService {
 			
 			$country = $league['country'];
 		}
-
 		
 		$firstNames = self::_getLines(FILE_FIRSTNAMES, $country);
 		$lastNames = self::_getLines(FILE_LASTNAMES, $country);
@@ -131,6 +130,10 @@ class DataGeneratorService {
 		$mainPositions['MS'] = 'Sturm';
 		$mainPositions['RS'] = 'Sturm';
 		
+		$totalPlayers = 0;
+		foreach($positions as $mainPosition => $numberOfPlayers) {$totalPlayers += $numberOfPlayers;}
+		$absolutForeigners = $totalPlayers*$percForeigners/100;
+		
 		// create players for all positions
 		foreach($positions as $mainPosition => $numberOfPlayers) {
 			
@@ -142,12 +145,54 @@ class DataGeneratorService {
 				
 				$firstName = self::_getItemFromArray($firstNames);
 				$lastName = self::_getItemFromArray($lastNames);
+				$nation = $country;
+
+				$coeffForeigners = $absolutForeigners*100/$totalPlayers--;
+
+				if($coeffForeigners == 100 || ($coeffForeigners > 0 && mt_rand(0,100) < $coeffForeigners)) {
+					$foreign_country = self::_getRandomCountry($country);
+					$foreign_firstNames = self::_getLines(FILE_FIRSTNAMES, $foreign_country);
+					$foreign_lastNames = self::_getLines(FILE_LASTNAMES, $foreign_country);
+					$firstName = self::_getItemFromArray($foreign_firstNames);
+					$lastName = self::_getItemFromArray($foreign_lastNames);
+					$nation = $foreign_country;
+					$absolutForeigners -= 1;
+				}
+
 				self::_createPlayer($websoccer, $db, $teamId, $firstName, $lastName,
-						$mainPositions[$mainPosition], $mainPosition, $strengths, $country, $playerAge, $birthday, $salary, $contractDuration, $maxDeviation);
+						$mainPositions[$mainPosition], $mainPosition, $strengths, $nation, $playerAge, $birthday, $salary, $contractDuration, $maxDeviation);
 			}
 
 		}
 		
+	}
+
+	/**
+	 * Provides a list of country names which are feasable for player generation (i.e. scouting).
+	 * These are the names of the folders containing dummy names.
+	 * 
+	 * @return array array of (untranslated) country names which can be used for generating new players.
+	 */
+	private static function _getRandomCountry($except = "") {
+		/*$dir = BASE_FOLDER."/admin/config/names/";
+		$countries = array();
+		if($dh = opendir($dir)) {
+			while(($file = readdir($dh)) !== false) {
+				if(is_dir($dir.$file) && $file != "." && $file != ".." && $file != $except) $countries[] = $file;
+			}
+			closedir($dh);
+		}*/
+		$iterator = new DirectoryIterator(BASE_FOLDER . "/admin/config/names/");
+		
+		$countries = array();
+		while($iterator->valid()) {
+			if ($iterator->isDir() && !$iterator->isDot() && $iterator->getFilename() != $except) {
+				$countries[] = $iterator->getFilename();
+			}
+			
+			$iterator->next();
+		}
+		return self::_getItemFromArray($countries);
 	}
 	
 	private static function _getLines($fileName, $country) {

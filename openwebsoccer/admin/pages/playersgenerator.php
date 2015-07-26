@@ -130,6 +130,9 @@ elseif ($show == "generateform") {
 	if (isset($_REQUEST["transfermarket"]) && $_REQUEST["transfermarket"]) {
 		$formFields["entity_player_nation"] = array("type" => "text", "value" => "Deutschland");
 	}
+	else{
+		$formFields["entity_player_foreigners"] = array("type" => "percent", "value" => 30);
+	}
 	
 	$formFields["player_age"] = array("type" => "number", "value" => 25);
 	
@@ -210,7 +213,7 @@ elseif ($show == "generate") {
 	// generate for specific team
 	if ($teamid > 0) {
 		DataGeneratorService::generatePlayers($website, $db, $teamid, $_POST['player_age'], $_POST['player_age_deviation'],
-$_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], $strengths, $positions, $_POST["playersgenerator_label_deviation"]);
+$_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], $strengths, $positions, $_POST["playersgenerator_label_deviation"], $_POST["entity_player_foreigners"]);
 	} elseif ($leagueid > 0) {
 		// generate for all teams of league
 		
@@ -220,14 +223,14 @@ $_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], 
 		$result = $db->querySelect($columns, $fromTable, $whereCondition, $leagueid);
 		while ($team = $result->fetch_array()) {
 			DataGeneratorService::generatePlayers($website, $db, $team["id"], $_POST['player_age'], $_POST['player_age_deviation'],
-$_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], $strengths, $positions, $_POST["playersgenerator_label_deviation"]);
+$_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], $strengths, $positions, $_POST["playersgenerator_label_deviation"], $_POST["entity_player_foreigners"]);
 		}
 		$result->free();
 
 	} else {
 		// generate for transfer market
 		DataGeneratorService::generatePlayers($website, $db, 0, $_POST['player_age'], $_POST['player_age_deviation'],
-$_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], $strengths, $positions, $_POST["playersgenerator_label_deviation"], $_POST['entity_player_nation']);
+$_POST['entity_player_vertrag_gehalt'], $_POST['entity_player_vertrag_spiele'], $strengths, $positions, $_POST["playersgenerator_label_deviation"], 0, $_POST['entity_player_nation']);
 	}
 
 	echo createSuccessMessage($i18n->getMessage("generator_success"), "");
