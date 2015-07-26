@@ -9,7 +9,7 @@
 
 <form class="form-inline" method="post">
 
-    <label class="control-label" for="country">{{ i18n.getMessage("entity_league") }}</label> 
+    <label class="control-label" for="country">{{ i18n.getMessage("entity_league") }}</label>
     <select id="leagueid" name="leagueid">
         <option></option>
     {% for leagueItem in leagues %}
@@ -17,7 +17,7 @@
     {% endfor %}
     </select>
 
-    <button type="submit" class="btn btn-primary ajaxSubmit" 
+    <button type="submit" class="btn btn-primary ajaxSubmit"
         data-ajaxtarget="pagecontent">{{ i18n.getMessage('button_display') }}</button>
 
     <input type="hidden" name="page" value="topassist" />
@@ -35,7 +35,7 @@
             </tr>
         </thead>
         <tbody>
-        
+
             {% for player in players %}
             <tr>
                 <td><strong>{{ loop.index }}</strong></td>
@@ -50,7 +50,7 @@
                 <td>{{ player.assists }}</td>
             </tr>
             {% endfor %}
-        
+
         </tbody>
     </table>
 

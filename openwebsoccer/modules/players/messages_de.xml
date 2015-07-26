@@ -77,8 +77,8 @@
     <message id="topstrikers_navlabel">Torjägerliste</message>
     <message id="topstrikers_title">Top Torschützen</message>
 
-    <message id="topscorers_navlabel">Top-Scorer</message>
+    <message id="topscorers_navlabel">Top Scorers</message>
     <message id="topscorers_head_score">Score</message>
-    
-    <message id="topassist_navlabel">Top-Vorlagengeber</message>
+
+    <message id="topassist_navlabel">Top Vorlagengeber</message>
 </messages>
