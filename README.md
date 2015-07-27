@@ -10,47 +10,29 @@ Live-Spiel, wo der User Live in das Spiel eingreifen kann.
 
 Viele Optinonen und viele Einstellungsmöglichkeiten runden die Open Websoccer-Sim ab.
 
-## Die TLC-Version beinhaltet zur Zeit folgende Änderungen bzw. Erweiterungen
+
+## Die TLC-Version der Open Websoccer-Sim
 
 Die neue Core-Struktur bietet eine einfache Entwicklung. Änderungen an den Orginal-Dateien bzw. Erweiterungen mittels extend
 sind daher nicht mehr nötig und erhöhen damit die Stabilität. Legen Sie eine bearbeitete Kopie der Datei in die ursprünglichen
 Ordnern. So können auch Fremdmodule leicht eingebunden oder getestet werden.
 
-- Die Null-Byte-Dateien wurden entfernt und in der lockfile.txt Versionsinformationen eingefügt
-- alle Dateien aus dem Verzeichniss classes wurden den Modulen im Ordner modules zugeordnet
-- alle Dateien aus dem Verzeichnis templates/default wurden den Mmodulen im Ordner modules zugeordnet
-- für die Zuordnung der Dateien zu den Modulen wurde eine Batch-Datei ersellt, siehe im Ordner websoccer-tools
-- die Installationsführung wurde angepasst, so das sich nun Fragen dazu erübrigen dürften
-- alternative job.php im Hauptverzeichnis ( Parameter werden über die Konfiguration gesteuert )
-- Anpassung der Datei websoccer/admin/config/version.txt auf Open Websoocer-Sim / TLC 1.0
-
-29.04.2015 Neu:
-
-- zusätzliche Vor- und Nachnahme-Dateien für Frankreich, Japan Männer & Frauen
-- Actionlogs: mit Datumsanzeige & Uhrzeit
-- Actionlogs: zusätzlicher Seite im Frontend für den Admin zur Anzeige aller verfügbaren Aktivitäten
-- die urspünglichen Ordner bleiben für Eure eigenen Anpassungen & Test leer
-- Updates werden in den Core integriert und überschreiben somit nicht Eure Änderungen und Erweiterungen
-
-02.05.2015 Neu:
-
-- automatisches entblocken von Spielen (default) Der Admin muss nicht das geblockte Spiel von Hand frei geben.
-
-03.05.2015 Neu:
-
-- Frontend: Statistik & Refresh Die Userzählung wird sofort anstatt erst nach 15 Minuten korrigiert.
-
-04.05.2015 Neu:
-
-- Seite: "Heutige Spiele" jetzt mit Auto-Refresh Endlich kann man auf dieser Seite die Spiele Live verfolgen ohne klicken zu müssen.
-
-05.05.2015 Neu:
-
-- Footer: feste Position & Bild möglich Das der Footer bei wenig Content in der Bildmitte steht ist nun vorbei.
+Aufgrund der mittlerweile vielen Änderungen, Anpassungen, Verbesserungen und Erweiterungen, sehen sie bitte den Stand auf
+folgende Url nach: https://github.com/rolfjoseph/open-websoccer-tlc/commits/Open-Websoocer-Sim-/-TLC-1.0---Core
+Dort ist der Fortschritt der Entwicklung dokumentiert.
 
 
-Das Verzeichnis kann nun auch als Update genutzt werden. Die gesetzte Konfiguration wird nun nicht mehr überschrieben, da die
-Datei config.inc.php nicht mehr mitgeliefert wird.
+## Updates bei der TLC-Version ganz einfach
+
+Zum aktualisieren, brauchen sie nur das herunter geladene Verzeichnis openwebsoccer über Ihr Verzeichnis auf ihrem Webspace
+zu kopieren. Die gesetzte Konfiguration wird nicht überschrieben, da die Datei config.inc.php nicht mehr mitgeliefert wird.
+Sollte es Ergänzungen zur Konfiguration gegen, so werden diese automatisch mit eingebunden.
+
+
+## OpenWebsoccer.de - die Webpräsenz
+
+Dort wird nach und nach auf verschiedene Bereiche eingegangen. Es soll eine Info-Plattform werden.
+Ein Forum ist derzeit nicht geplant.
 
 
 ## Dieser Ableger basiert auf der Open Websoccer-Sim, die sie hier bekommen:
