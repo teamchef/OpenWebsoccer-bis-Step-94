@@ -315,19 +315,46 @@ class UsersDataService {
 	}
 
 	/**
-	 * Provide number of users who are currently online.
-	 *
-	 * @param WebSoccer $websoccer Application context.
-	 * @param DbConnection $db DB connection.
-	 * @return int number of users who are currently online.
-	 */
+	* Provide number of users who are currently online.
+	*
+	* Jetzt nur noch die wirklich online sind / by ErdemCan
+	* 
+	* @param WebSoccer $websoccer Application context. 
+	* @param DbConnection $db DB connection.
+	* @return int number of users who are currently online.
+	*/
 	public static function countOnlineUsers(WebSoccer $websoccer, DbConnection $db) {
-		$timeBoundary = $websoccer->getNowAsTimestamp();
 
-		$result = $db->querySelect("COUNT(*) AS hits", $websoccer->getConfig("db_prefix") . "_user",
-				"lastonline >= %d", $timeBoundary);
-		$users = $result->fetch_array();
+		// augenblickliche Zeit
+		$timeBoundary = $websoccer->getNowAsTimestamp() - 1 * 20;
+
+		// Zeit der Inaktivität bis 20 Minuten
+		$timeBoundarylate = $websoccer->getNowAsTimestamp() - 20 * 60;
+
+		// Wer ist gerade Aktiv
+		$result = $db->querySelect("COUNT(*) AS hits", $websoccer->getConfig("db_prefix") . "_user", "lastonline >= %d", $timeBoundary);
+		$userstb = $result->fetch_array();
 		$result->free();
+
+		// Wer liegt im 20 Minuten Zeitrahmen
+		$result = $db->querySelect("COUNT(*) AS hits", $websoccer->getConfig("db_prefix") . "_user", "lastonline >= %d", $timeBoundarylate);
+		$userstblate = $result->fetch_array();
+		$result->free();
+
+		// Wer ist als eingeloggt gekennzeichnet - ip_time wurde bisher nicht genutzt
+		$result = $db->querySelect("COUNT(*) AS hits", $websoccer->getConfig("db_prefix") . "_user", "ip_time = 1");
+		$usersno = $result->fetch_array();
+		$result->free();
+
+		// Abfrage um ausgeloggte User sofort aus dem Zähler zu nehmen
+		// auch User die sich nicht ausloggen, werden nach dem Zeitfenster nicht mehr berücksichtigt
+		if ($userstb == $userstblate) {
+			$users = $userstb;
+		}
+
+		if ($userstb <= $usersno) {
+			$users = $userstb;
+		}
 
 		if (isset($users["hits"])) {
 			return $users["hits"];

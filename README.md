@@ -26,7 +26,7 @@ Dort ist der Fortschritt der Entwicklung dokumentiert.
 
 Zum aktualisieren, brauchen sie nur das herunter geladene Verzeichnis openwebsoccer über Ihr Verzeichnis auf ihrem Webspace
 zu kopieren. Die gesetzte Konfiguration wird nicht überschrieben, da die Datei config.inc.php nicht mehr mitgeliefert wird.
-Sollte es Ergänzungen zur Konfiguration gegen, so werden diese automatisch mit eingebunden.
+Sollte es Ergänzungen zur Konfiguration geben, so werden diese automatisch mit eingebunden.
 
 
 ## OpenWebsoccer.de - die Webpräsenz
