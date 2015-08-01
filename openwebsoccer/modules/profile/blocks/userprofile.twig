@@ -8,7 +8,7 @@
 
 {% block box_content %}
 
-<i class="icon-time"></i> {{ "now"|date(" d. m. Y - H:i", "Europe/Berlin") }} <br><br>
+<i class="icon-time"></i> {{ post.published_at|date(" d. m. Y - H:i", "Europe/Berlin") }} <br><br>
 
 {% if env.user.profilepicture|length > 0 %}
 	<a href="{{ env.getInternalUrl("user", "id=" ~ env.user.id) }}">
@@ -74,6 +74,25 @@
 	<a href="{{ env.getInternalUrl("team", "id=" ~ nextMatch.match_guest_id) }}">{{ nextMatch.match_guest_name }}</a></strong></p>
 {% endif %}
 
+{% if secondnextMatch.match_date is defined %}
+	{% if secondnextMatch.match_home_id == userteam.team_id and secondnextMatch.match_home_formation_id %}
+		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
+	{% elseif nextMatch.match_guest_id == userteam.team_id and secondnextMatch.match_guest_formation_id %}
+		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
+	{% else %}
+		<i class="icon-minus-sign-alt wstooltip" title="{{ i18n.getMessage("formation_notsubmitted_tooltip") }}"></i>
+	{% endif %}
+	Aufstellungsabgabe:
+	<p><em>{{ env.getFormattedDatetime(secondnextMatch.match_date) }} | {{ i18n.getMessage("matchtype_" ~ secondnextMatch.match_type) }}</em><p>
+	<strong><a href="{{ env.getInternalUrl("team", "id=" ~ secondnextMatch.match_home_id) }}">{{ secondnextMatch.match_home_name }}</a>	-
+	<a href="{{ env.getInternalUrl("team", "id=" ~ secondnextMatch.match_guest_id) }}">{{ secondnextMatch.match_guest_name }}</a></strong></p>
+{% endif %}
+
+	<form method="post" class="form-inline">
+		<input type="hidden" name="page" value="formation" />
+		<button type="submit" class="btn">zur Aufstellung</button>
+	</form>
+
 {% if nationalMatch.match_date is defined %}
 	{% if nationalMatch.match_home_id == nationalteam and nationalMatch.match_home_formation_id %}
 		<i class="icon-check-sign wstooltip" title="{{ i18n.getMessage("formation_submitted_tooltip") }}"></i>
@@ -101,3 +120,4 @@
 | <i class="icon-user"></i> <a href="{{ env.getInternalUrl("profile") }}"> {{ i18n.getMessage('userprofile_block_link_profile') }}</a></p>
 
 {% endblock %}
+

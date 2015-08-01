@@ -74,9 +74,10 @@ class ProfileBlockModel implements IModel {
 		// unseen notifications
 		$unseenNotifications = NotificationsDataService::countUnseenNotifications($this->_websoccer, $this->_db, $user->id, $clubId);
 		$nextMatch = MatchesDataService::getNextMatch($this->_websoccer, $this->_db, $clubId);
+		$secondnextMatch = MatchesDataService::getsecondNextMatch($this->_websoccer, $this->_db, $clubId);
 
 		return array("tableRank" => $teamRank, "profile" => $userinfo, "userteam" => $team, "unseenMessages" => $unseenMessages,"unseenNotifications" => $unseenNotifications,
-					  "teamsize" => $teamsize, "nextMatch" => $nextMatch, 'nationalMatch' => $nationalMatch, 'nationalteam' => $this->_teamId);}
+					  "teamsize" => $teamsize, "nextMatch" => $nextMatch, "secondnextMatch" => $secondnextMatch, 'nationalMatch' => $nationalMatch, 'nationalteam' => $this->_teamId);}
 }
 
 ?>
