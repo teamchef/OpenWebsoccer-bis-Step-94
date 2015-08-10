@@ -19,6 +19,14 @@
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
+
+if (file_exists('../admin/config/config.inc.php')) {
+	require '../admin/pages/deldir.inc.php';
+	deldir ('../install');
+
+	header('Location: ../update/index.php');
+}
+
 error_reporting(E_ALL);
 define("BASE_FOLDER", __DIR__ ."/..");
 
@@ -507,6 +515,11 @@ function printFinalPage($messages) {
 
 	<p><i class="icon-arrow-right"></i> <a href="<?php echo $conf["context_root"]; ?>/admin"><?php echo $messages["final_link"]; ?></a></p>
 	<?php
+
+	require '../admin/pages/deldir.inc.php';
+	deldir ('../install');
+	deldir ('../update');
+	deldir ('../cache');
 }
 ?>
 <!DOCTYPE html>
@@ -588,7 +601,7 @@ function printFinalPage($messages) {
       <hr>
 
       <footer>
-        <p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a> by Ingo Hofmann / <a href="https://github.com/rolfjoseph/open-websoccer-tlc" target="_blank">TLC Version</a> Step 82 / Co-Powered by Rolf Joseph / ErdemCan
+        <p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a> by Ingo Hofmann / <a href="https://github.com/rolfjoseph/open-websoccer-tlc" target="_blank">TLC Version</a> Step 84 / Co-Powered by Rolf Joseph / ErdemCan
 	        	</p>
       </footer>
 	</div>

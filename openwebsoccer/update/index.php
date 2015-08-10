@@ -175,6 +175,10 @@ function printFinalPage($messages) {
 
 	<p><i class="icon-arrow-right"></i> <a href="<?php echo $conf["context_root"]; ?>/admin"><?php echo $messages["final_link"]; ?></a></p>
 	<?php
+
+	require '../admin/pages/deldir.inc.php';
+	deldir ('../update');
+	deldir ('../cache');
 }
 ?>
 <!DOCTYPE html>
@@ -200,7 +204,7 @@ function printFinalPage($messages) {
 		<hr>
 
 		<?php
-		
+
 		// Start - PHP-Vorababfrage mit Hinweisen
 
 		if (strnatcmp(phpversion(),'5.3.1')<= 0) {
@@ -257,7 +261,7 @@ function printFinalPage($messages) {
       <hr>
 
       <footer>
-       <p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a> by Ingo Hofmann / <a href="https://github.com/rolfjoseph/open-websoccer-tlc" target="_blank">TLC Version</a> Step 82 / Co-Powered by Rolf Joseph / ErdemCan
+       <p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a> by Ingo Hofmann / <a href="https://github.com/rolfjoseph/open-websoccer-tlc" target="_blank">TLC Version</a> Step 84 / Co-Powered by Rolf Joseph / ErdemCan
 	        	</p>
       </footer>
 	</div>
