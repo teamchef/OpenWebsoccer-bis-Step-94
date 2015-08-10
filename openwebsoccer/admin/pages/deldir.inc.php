@@ -19,18 +19,28 @@
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
+	function deldir ($path) {
+		$dir = @opendir ($path);
 
-echo '<h1>'. $i18n->getMessage('clearcache_title') .'</h1>';
+    	if (!$dir) {
+        	return;
+    	}
 
-$website->resetConfigCache();
+    	while (($entry = @readdir($dir)) !== false) {
+       		if ($entry == '.' || $entry == '..') continue;
 
-require 'deldir.inc.php';
-deldir ('../cache');
-mkdir('../cache', 0700);
+        	if (is_dir ($path.'/'.$entry)) {
+            	$res = deldir ($path.'/'.$entry);
+            
+        	} else if (is_file ($path.'/'.$entry) || is_link ($path.'/'.$entry)) {
+            	$res = @unlink ($path.'/'.$entry);
+       		}
+    	}
 
-// clear templates cache
-$website->getTemplateEngine($i18n)->clearCache();
+    	@closedir ($dir);
 
-echo createSuccessMessage($i18n->getMessage('clearcache_success_title'), $i18n->getMessage('clearcache_success_message'));
+    	$res = @rmdir ($path);
 
+    	return;
+	}
 ?>
