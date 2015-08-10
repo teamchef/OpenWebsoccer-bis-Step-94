@@ -3,19 +3,19 @@
 
   This file is part of OpenWebSoccer-Sim.
 
-  OpenWebSoccer-Sim is free software: you can redistribute it 
-  and/or modify it under the terms of the 
-  GNU Lesser General Public License 
+  OpenWebSoccer-Sim is free software: you can redistribute it
+  and/or modify it under the terms of the
+  GNU Lesser General Public License
   as published by the Free Software Foundation, either version 3 of
   the License, or any later version.
 
   OpenWebSoccer-Sim is distributed in the hope that it will be
   useful, but WITHOUT ANY WARRANTY; without even the implied
-  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public 
-  License along with OpenWebSoccer-Sim.  
+  You should have received a copy of the GNU Lesser General Public
+  License along with OpenWebSoccer-Sim.
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
@@ -34,12 +34,12 @@ if (!$show) {
   <h1><?php echo $mainTitle; ?></h1>
 
   <p><?php echo $i18n->getMessage('entitylogging_intro'); ?></p>
-  
+
   <code>&lt;overview delete=&quot;true&quot; edit=&quot;true&quot; <strong>logging=&quot;true&quot; loggingcolumns=&quot;name,liga_id&quot;</strong>&gt;</code>
 
   <?php
 
-  $datei = 'config/entitylog.php';
+  $datei = '../generated/entitylog.php';
 
   if (!file_exists($datei)) echo createErrorMessage($i18n->getMessage('alert_error_title'), $i18n->getMessage('all_logging_filenotfound'));
   else {
@@ -70,14 +70,14 @@ if (!$show) {
 				$line = $file[$i];
 
                 $row = explode(';', $line);
-				
+
 				$n = $i + 1;
                 echo '<tr>
                   <td><b>'. $n .'</b></td>
                   <td>'. $row[0] .'</td>
                   <td>'. escapeOutput($row[1]) .' ('. escapeOutput($row[2]) . ')</td>
-                  <td>'; 
-                  
+                  <td>';
+
                   	if ($row[3] == LOG_TYPE_EDIT) {
 						echo '<span class=\'label label-info\'><i class=\'icon-white icon-pencil\'></i> '. $i18n->getMessage('entitylogging_action_edit') . '</span>';
 					} elseif ($row[3] == LOG_TYPE_DELETE) {
@@ -95,9 +95,9 @@ if (!$show) {
 						} else {
 							echo ', ';
 						}
-						
+
 						echo $fieldKey . ': ' . escapeOutput($fieldValue);
-						
+
 					}
 				   echo ' }</td>
                 </tr>';

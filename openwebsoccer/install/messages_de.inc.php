@@ -1,6 +1,6 @@
-<?php 
+<?php
 
-$messages["button_next"] = "Weiter";
+$messages["button_next"] = "weiter";
 $messages["requires_value"] = "Erfordert eine Eingabe";
 
 $messages["check_title"] = "Systemanforderungen testen";
@@ -59,7 +59,7 @@ $messages["label_name"] = "Benutzername";
 $messages["label_password"] = "Passwort";
 $messages["label_email"] = "E-Mail";
 
-$messages["final_success_alert"] = "Glückwunsch, die Software wurde erfolgreich installiert!";
-$messages["final_success_note"] = "Löschen Sie nun unbedingt das komplette Verzeichnis <i>/install</i> innerhalb Ihres Websoccer-Ordners auf diesem Server!";
+$messages["final_success_alert"] = "Glückwunsch, die Software wurde erfolgreich installiert !";
+$messages["final_success_note"] = "Löschen Sie nun unbedingt das komplette Verzeichnis <i>/install</i> innerhalb Ihres Websoccer-Ordners auf diesem Server !";
 $messages["final_link"] = "Als Administrator anmelden";
 ?>

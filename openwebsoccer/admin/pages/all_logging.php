@@ -3,19 +3,19 @@
 
   This file is part of OpenWebSoccer-Sim.
 
-  OpenWebSoccer-Sim is free software: you can redistribute it 
-  and/or modify it under the terms of the 
-  GNU Lesser General Public License 
+  OpenWebSoccer-Sim is free software: you can redistribute it
+  and/or modify it under the terms of the
+  GNU Lesser General Public License
   as published by the Free Software Foundation, either version 3 of
   the License, or any later version.
 
   OpenWebSoccer-Sim is distributed in the hope that it will be
   useful, but WITHOUT ANY WARRANTY; without even the implied
-  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public 
-  License along with OpenWebSoccer-Sim.  
+  You should have received a copy of the GNU Lesser General Public
+  License along with OpenWebSoccer-Sim.
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
@@ -37,7 +37,7 @@ if (!$show) {
 
   <?php
 
-  $datei = 'config/adminlog.php';
+  $datei = '../generated/adminlog.php';
 
   if (!file_exists($datei)) echo createErrorMessage($i18n->getMessage('alert_error_title'), $i18n->getMessage('all_logging_filenotfound'));
   elseif ($admin['r_demo']) echo createErrorMessage($i18n->getMessage('error_access_denied'), '');
@@ -71,7 +71,7 @@ if (!$show) {
         <input type='hidden' name='action' value='leeren'>
 		<input type='hidden' name='site' value='<?php echo $site; ?>'>
         <p><input type='submit' class='btn' value='<?php echo $i18n->getMessage('all_logging_button_empty_file'); ?>'></p>
-        
+
       </form>
 
       <p>(<?php echo $i18n->getMessage('all_logging_only_last_entries_shown'); ?>)</p>
@@ -94,7 +94,7 @@ if (!$show) {
 				$line = $file[$i];
 
                 $row = explode(', ', $line);
-				
+
 				$n = $i + 1;
                 echo '<tr>
                   <td><b>'. $n .'</b></td>

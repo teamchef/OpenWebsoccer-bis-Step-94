@@ -88,7 +88,7 @@ if ($inputUser or $inputPassword) {
 					$content = $admin['name'] .', '. $ip .', '. date('d.m.y - H:i:s');
 					$content .= "\n";
 
-					$datei = 'config/adminlog.php';
+					$datei = '../generated/adminlog.php';
 					$fp = fopen($datei, 'a+');
 
 					if (filesize($datei)) {
@@ -177,7 +177,7 @@ if ($forwarded) {
 
       <footer>
  		<div id="footer">
-	        	<p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a> by Ingo Hofmann / <a href="https://github.com/rolfjoseph/open-websoccer-tlc" target="_blank">TLC Version</a> Step 81 / Co-Powered by Rolf Joseph / ErdemCan
+	        	<p>Powered by <a href="http://www.websoccer-sim.com" target="_blank">OpenWebSoccer-Sim</a> by Ingo Hofmann / <a href="https://github.com/rolfjoseph/open-websoccer-tlc" target="_blank">TLC Version</a> Step 82 / Co-Powered by Rolf Joseph / ErdemCan
 	        	</p></div>
       </footer>
 	</div>

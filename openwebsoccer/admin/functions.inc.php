@@ -3,26 +3,26 @@
 
   This file is part of OpenWebSoccer-Sim.
 
-  OpenWebSoccer-Sim is free software: you can redistribute it 
-  and/or modify it under the terms of the 
-  GNU Lesser General Public License 
+  OpenWebSoccer-Sim is free software: you can redistribute it
+  and/or modify it under the terms of the
+  GNU Lesser General Public License
   as published by the Free Software Foundation, either version 3 of
   the License, or any later version.
 
   OpenWebSoccer-Sim is distributed in the hope that it will be
   useful, but WITHOUT ANY WARRANTY; without even the implied
-  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+  warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
   See the GNU Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General Public 
-  License along with OpenWebSoccer-Sim.  
+  You should have received a copy of the GNU Lesser General Public
+  License along with OpenWebSoccer-Sim.
   If not, see <http://www.gnu.org/licenses/>.
 
 ******************************************************/
 
 /**
  * Escapes for HTML output. Uses <code>htmlspecialchars</code> (UTF-8).
- * 
+ *
  * @param string $message message string to escape.
  * @return string escaped input string, ready for secure HTML output.
  */
@@ -32,7 +32,7 @@ function escapeOutput($message) {
 
 /**
  * Creates code for displaying an alert with severity Warning.
- * 
+ *
  * @param string $title message title.
  * @param string $message message details.
  * @return string HTML code displaying an alert.
@@ -93,7 +93,7 @@ function createMessage($severity, $title, $message) {
 
 /**
  * Writes a log statement into the entity log file.
- * 
+ *
  * @param WebSoccer $websoccer application context.
  * @param string $type edit|delete
  * @param string $username name of admin who executed an action.
@@ -103,8 +103,8 @@ function createMessage($severity, $title, $message) {
 function logAdminAction(WebSoccer $websoccer, $type, $username, $entity, $entityValue) {
 	$userIp = getenv('REMOTE_ADDR');
 	$message = $websoccer->getFormattedDatetime($websoccer->getNowAsTimestamp()) . ';' . $username . ';' . $userIp . ';' . $type . ';' . $entity . ';' . $entityValue;
-	$file = BASE_FOLDER . '/admin/config/entitylog.php';
-	
+	$file = BASE_FOLDER . '/generated/entitylog.php';
+
 	$fw = new FileWriter($file, FALSE);
 	$fw->writeLine($message);
 	$fw->close();
