@@ -516,9 +516,14 @@ function printFinalPage($messages) {
 	<p><i class="icon-arrow-right"></i> <a href="<?php echo $conf["context_root"]; ?>/admin"><?php echo $messages["final_link"]; ?></a></p>
 	<?php
 
-	require '../admin/pages/deldir.inc.php';
-	deldir ('../install');
-	deldir ('../update');
+	if (file_exists('install')){
+		require '../admin/pages/deldir.inc.php';
+		deldir ('../install');
+	}
+	if (file_exists('update')){
+		require '../admin/pages/deldir.inc.php';
+		deldir ('../update');
+	}
 	deldir ('../cache');
 }
 ?>

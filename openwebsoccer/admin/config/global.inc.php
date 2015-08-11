@@ -163,14 +163,6 @@ if (!isset($conf)) {
 	header('location: install/index.php');
 	exit;
 }
-if (isset($conf)) {
-	if (file_exists('install')){
-		echo '<center>Das Installationsverzeichnis ist noch vorhanden ! - Unbedingt löschen !</center><br>';
-	}
-	if (file_exists('update')){
-		echo '<center>Das Update-Installationsverzeichnis ist noch vorhanden ! - Update ausführen und dann löschen bzw. Unbedingt löschen !</center><br>';
-	}
-}
 
 $page = null;
 $action = null;

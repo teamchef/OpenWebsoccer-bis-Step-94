@@ -24,6 +24,15 @@ echo '<h1>'. $i18n->getMessage('clearcache_title') .'</h1>';
 
 $website->resetConfigCache();
 
+	if (file_exists('./install')){
+		require 'deldir.inc.php';
+		deldir ('../install');
+	}
+	if (file_exists('./update')){
+		require 'deldir.inc.php';
+		deldir ('../update');
+	}
+
 require 'deldir.inc.php';
 deldir ('../cache');
 mkdir('../cache', 0700);
