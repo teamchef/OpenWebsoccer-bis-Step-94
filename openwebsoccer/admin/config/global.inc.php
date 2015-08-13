@@ -159,9 +159,16 @@ define('PROFPIC_UPLOADFOLDER', UPLOAD_FOLDER . 'users');
 
 // dependencies
 include(GLOBAL_CONFIG_FILE);
+
 if (!isset($conf)) {
 	header('location: install/index.php');
 	exit;
+} else {
+	require (BASE_FOLDER . '/admin/pages/deldir.inc.php');
+	deldir ('install');
+	deldir ('update');
+	deldir ('cache');
+	mkdir('cache', 0700);
 }
 
 $page = null;
