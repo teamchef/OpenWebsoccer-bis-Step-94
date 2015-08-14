@@ -24,18 +24,18 @@ echo '<h1>'. $i18n->getMessage('clearcache_title') .'</h1>';
 
 $website->resetConfigCache();
 
-	if (file_exists('./install')){
+	if (file_exists(BASE_FOLDER . '/install')){
 		require 'deldir.inc.php';
 		deldir ('../install');
 	}
-	if (file_exists('./update')){
+	if (file_exists(BASE_FOLDER . '/update')){
 		require 'deldir.inc.php';
 		deldir ('../update');
 	}
 
-require 'deldir.inc.php';
-deldir ('../cache');
-mkdir('../cache', 0700);
+	require (BASE_FOLDER . '/admin/pages/deldir.inc.php');
+	deldir (BASE_FOLDER .'/cache');
+	mkdir (BASE_FOLDER .'/cache', 0700);
 
 // clear templates cache
 $website->getTemplateEngine($i18n)->clearCache();

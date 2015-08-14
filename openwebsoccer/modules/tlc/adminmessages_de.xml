@@ -8,7 +8,7 @@
 	<message id="settings_label_sim_auto_deblock">Automatisches entblocken von Spielen: Der Admin muss die, nach Berechnungsfehlern vorsichtshalber geblockten Spiele, nicht mehr selbst entblocken.</message>
 
 	<message id="settings_label_transferoffersbetweenownteams_enabled">Direkttransfers auch zwischen den eigenen Teams erlauben.</message>
-	
+
 	<message id="settings_label_externlink1">externer Link 1 URL</message>
 	<message id="settings_label_externlink1txt">externer Link 1 Bezeichung</message>
 	<message id="settings_label_externlink2">externer Link 2 URL</message>
@@ -22,4 +22,6 @@
 	<message id="settings_label_usractv">Benutzerinaktivität berechnen und aktualisieren</message>
 	<message id="settings_label_stats">Ligastatistiken berechnen und aktualisieren</message>
 	<message id="settings_label_stadium">Fällige Stadionerweiterungen und Trainingslager ausführen</message>
+	
+	<message id="settings_label_version">TLC-Version</message>
 </messages>

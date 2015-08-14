@@ -8,7 +8,7 @@
 
 	<settings>
 		<setting id="sim_auto_deblock" category="tlc" type="boolean" default="1" />
-		
+
 		<setting id="externlink1" category="tlc" type="text" default="" />
 		<setting id="externlink1txt" category="tlc" type="text" default="" />
 		<setting id="externlink2" category="tlc" type="text" default="" />
@@ -20,5 +20,7 @@
       	<setting id="usractv" category="tlc" type="text" default="UserInactivityCheckJob" />
       	<setting id="stats" category="tlc" type="text" default="UpdateStatisticsJob" />
       	<setting id="stadium" category="tlc" type="text" default="AcceptStadiumConstructionWorkJob" />
+
+      	<setting id="version" category="tlc" type="text" default="Step 87 / Co-Powered by Rolf Joseph / ErdemCan" />
 	</settings>
 </module>
