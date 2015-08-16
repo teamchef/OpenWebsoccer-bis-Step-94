@@ -21,6 +21,6 @@
       	<setting id="stats" category="tlc" type="text" default="UpdateStatisticsJob" />
       	<setting id="stadium" category="tlc" type="text" default="AcceptStadiumConstructionWorkJob" />
 
-      	<setting id="version" category="tlc" type="text" default="Step 87 / Co-Powered by Rolf Joseph / ErdemCan" />
+      	<setting id="version" category="tlc" type="text" default="Step 88 / Co-Powered by Rolf Joseph / ErdemCan" />
 	</settings>
 </module>
