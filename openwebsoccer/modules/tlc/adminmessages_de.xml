@@ -5,6 +5,9 @@
 
 	<message id="settings_tab_tlc">TLC - Features</message>
 
+	<message id="settings_label_amount_aufstellung_enabled">Aufstellungsprämie für eine abgegebenen Aufstellung.</message>
+	<message id="settings_label_amount_aufstellung">Aufstellungsprämie:</message>
+
 	<message id="settings_label_sim_auto_deblock">Automatisches entblocken von Spielen: Der Admin muss die, nach Berechnungsfehlern vorsichtshalber geblockten Spiele, nicht mehr selbst entblocken.</message>
 
 	<message id="settings_label_transferoffersbetweenownteams_enabled">Direkttransfers auch zwischen den eigenen Teams erlauben.</message>
@@ -22,6 +25,6 @@
 	<message id="settings_label_usractv">Benutzerinaktivität berechnen und aktualisieren</message>
 	<message id="settings_label_stats">Ligastatistiken berechnen und aktualisieren</message>
 	<message id="settings_label_stadium">Fällige Stadionerweiterungen und Trainingslager ausführen</message>
-	
+
 	<message id="settings_label_version">TLC-Version</message>
 </messages>
